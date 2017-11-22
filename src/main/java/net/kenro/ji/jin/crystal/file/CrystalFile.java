@@ -3,23 +3,24 @@ package net.kenro.ji.jin.crystal.file;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import net.kenro.ji.jin.crystal.PSLanguage;
+import net.kenro.ji.jin.crystal.CrystalLanguage;
 import org.jetbrains.annotations.NotNull;
+import javax.swing.*;
 
-public class PSFile extends PsiFileBase {
-    public PSFile(@NotNull FileViewProvider viewProvider) {
-        super(viewProvider, PSLanguage.INSTANCE);
+public class CrystalFile extends PsiFileBase {
+    public CrystalFile(@NotNull FileViewProvider viewProvider) {
+        super(viewProvider, CrystalLanguage.INSTANCE);
     }
 
     @NotNull
     @Override
     public FileType getFileType() {
-        return PSFileType.INSTANCE;
+        return CrystalFileType.INSTANCE;
     }
 
     @Override
     public String toString() {
-        return "Purescript File";
+        return "Crystal File";
     }
 
     @Override

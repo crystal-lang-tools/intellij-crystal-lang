@@ -1,0 +1,47 @@
+language: java
+jdk:
+- oraclejdk8
+before_cache:
+- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+
+before_install:
+  - ./generate_parser.sh
+
+env:
+  global:
+  - ORG_GRADLE_PROJECT_downloadIdeaSources=false
+  matrix:
+  - ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
+  - ORG_GRADLE_PROJECT_ideaVersion=2017.1.2
+  - ORG_GRADLE_PROJECT_ideaVersion=2017.1.1
+  - ORG_GRADLE_PROJECT_ideaVersion=2017.1
+
+matrix:
+  allow_failures:
+  - env: ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
+
+# pull requests skip the deployment step
+#deploy:
+#  # deploy master to the dev channel
+#  - provider: script
+#    skip_cleanup: true
+#    script: ORG_GRADLE_PROJECT_publishChannels=Dev ORG_GRADLE_PROJECT_version=1.14-dev$TRAVIS_BUILD_NUMBER ./gradlew publishPlugin --info
+#    on:
+#      branch: master
+#      condition: $ORG_GRADLE_PROJECT_ideaVersion=2017.1
+#  # deploy master to EAP channel
+##  - provider: script
+##    script: ORG_GRADLE_PROJECT_publishChannels=EAP ./gradlew publishPlugin
+##    on:
+##      branch: master
+##      condition: $ORG_GRADLE_PROJECT_ideaVersion=2017.1
+#  # deploy tags to default stable channel
+#  - provider: script
+#    script: ORG_GRADLE_PROJECT_version=$TRAVIS_TAG ./gradlew publishPlugin
+#    on:
+#      tags: true
+#      condition: $ORG_GRADLE_PROJECT_ideaVersion=2017.1

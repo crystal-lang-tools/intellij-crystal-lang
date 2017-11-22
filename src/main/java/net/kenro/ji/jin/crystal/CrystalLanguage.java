@@ -2,10 +2,10 @@ package net.kenro.ji.jin.crystal;
 
 import com.intellij.lang.Language;
 
-public class PSLanguage extends Language {
-    public static final PSLanguage INSTANCE = new PSLanguage();
+public class CrystalLanguage extends Language {
+    public static final CrystalLanguage INSTANCE = new CrystalLanguage();
 
-    private PSLanguage() {
-        super("Purescript", "text/purescript", "text/x-purescript", "application/x-purescript");
+    private CrystalLanguage() {
+        super("Crystal", "text/crystal", "text/x-crystal", "application/x-crystal");
     }
 }

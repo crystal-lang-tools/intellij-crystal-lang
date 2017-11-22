@@ -1,30 +1,31 @@
 package net.kenro.ji.jin.crystal.file;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
-import net.kenro.ji.jin.crystal.icons.PSIcons;
-import net.kenro.ji.jin.crystal.PSLanguage;
+import net.kenro.ji.jin.crystal.icons.CrystalIcons;
+import net.kenro.ji.jin.crystal.CrystalLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import javax.swing.*;
 
-public class PSFileType extends LanguageFileType {
+public class CrystalFileType extends LanguageFileType {
 
-    public static final PSFileType INSTANCE = new PSFileType();
-    public static final String DEFAULT_EXTENSION = "purs";
+    public static final CrystalFileType INSTANCE = new CrystalFileType();
+    public static final String DEFAULT_EXTENSION = "cr";
 
-    private PSFileType() {
-        super(PSLanguage.INSTANCE);
+    private CrystalFileType() {
+        super(CrystalLanguage.INSTANCE);
     }
 
     @NotNull
     @Override
     public String getName() {
-        return "Purescript file";
+        return "Crystal file";
     }
 
     @NotNull
     @Override
     public String getDescription() {
-        return "Purescript file";
+        return "Crystal file";
     }
 
     @NotNull
@@ -36,6 +37,6 @@ public class PSFileType extends LanguageFileType {
     @Nullable
     @Override
     public Icon getIcon() {
-        return PSIcons.FILE;
+        return CrystalIcons.FILE;
     }
 }

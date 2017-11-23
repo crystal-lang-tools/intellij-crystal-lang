@@ -196,7 +196,7 @@ charControl = "^" [:uppercase:]
   "abstract"         { return ABSTRACT; }
   "pointerof"        { return POINTEROF; }
 
-
+  "break"            { return BREAK; }
   "initialize"       { return INITIALIZE; }
   "new"              { return NEW; }
   "loop"             { return LOOP; }

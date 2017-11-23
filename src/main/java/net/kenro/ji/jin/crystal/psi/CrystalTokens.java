@@ -185,6 +185,7 @@ public interface CrystalTokens {
     CrystalElementType TRAP = new CrystalElementType("trap");
     CrystalElementType UNTRACE_VAR = new CrystalElementType("untrace_var");
     CrystalElementType WARN = new CrystalElementType("warn");
+    CrystalElementType BREAK = new CrystalElementType("break");
 
     CrystalElementType STRING = new CrystalElementType("string");
     CrystalElementType STRING_ESCAPED = new CrystalElementType("string escaping");
@@ -202,7 +203,7 @@ public interface CrystalTokens {
             INSTANCE_SIZEOF, ABSTRACT, POINTEROF, INITIALIZE, NEW, LOOP, PREPEND, FAIL, GETTER, SETTER, PROPERTY, CATCH, THROW, ABORT, AT_EXIT,
             AUTOLOAD, BINDING, CALLCC, CALLER, CALLER_LOCATIONS, CHOMP, CHOP, EVAL, EXEC, EXIT, EXIT_BANG, FORK, FORMAT, GETS, GLOBAL_VARIABLES,
             GSUB, ITERATOR, LAMBDA, LOAD, LOCAL_VARIABLES, OPEN, P, PRINT, PRINTF, PROC, PUTC, PUTS, RAND, READLINE, READLINES, SET_TRACE_FUNC,
-            SLEEP, SPAWN, SPRINTF, SRAND, SUB, SYSCALL, SYSTEM, TEST, TRACE_VAR, TRAP, UNTRACE_VAR, WARN);
+            SLEEP, SPAWN, SPRINTF, SRAND, SUB, SYSCALL, SYSTEM, TEST, TRACE_VAR, TRAP, UNTRACE_VAR, WARN, BREAK);
 
     TokenSet brackets = TokenSet.create(LEFT_BRACE, RIGHT_BRACE, LEFT_PAREN, RIGHT_PAREN, LEFT_BRACKET, RIGHT_BRACKET);
 

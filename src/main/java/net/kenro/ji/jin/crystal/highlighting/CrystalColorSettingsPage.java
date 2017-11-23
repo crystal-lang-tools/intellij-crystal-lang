@@ -49,65 +49,33 @@ public class CrystalColorSettingsPage implements ColorSettingsPage {
     @Override
     public String getDemoText() {
 
-        return "module DemoText.View where\n" +
+        return "module Cool\n" +
+                "end\n" +
                 "\n" +
-                "import Prelude hiding (<import_ref>div</import_ref>)\n" +
-                "import UserManagement.Models (<type_name>Model(..)</type_name>, <type_name>User(..)</type_name>, <type_name>class Cool</type_name>)\n" +
-                "import UserManagement.Query\n" +
-                "import Data.Functor (<import_ref>map</import_ref>)\n" +
+                "require \"something\"\n" +
                 "\n" +
-                "-- This is a line comment\n" +
+                "class Person\n" +
+                "  def initialize(name : String)\n" +
+                "    @name = name\n" +
+                "    @age = 0\n" +
+                "  end\n" +
                 "\n" +
-                "{- \n" +
-                " This is a block comment\n" +
-                "-}\n" +
+                "  def name\n" +
+                "    @name\n" +
+                "  end\n" +
                 "\n" +
-                "newtype <type_name>X</type_name> = <type_name>X Int</type_name>\n" +
+                "  def age\n" +
+                "    @age\n" +
+                "  end\n" +
+                "end\n" +
                 "\n" +
-                "<type_annotation_name>patternNewtype</type_annotation_name> :: <type_name>Boolean</type_name>\n" +
-                "patternNewtype =\n" +
-                "  let <type_variable>X</type_variable> a = <type_variable>X</type_variable> 123\n" +
-                "  in\n" +
-                "   a == 123\n" +
+                "private def method\n" +
+                " 42\n" +
+                "end\n" +
                 "\n" +
-                "<type_annotation_name>patternDoNewtype</type_annotation_name> :: forall <type_variable>e</type_variable>. <type_name>Eff</type_name> <type_variable>e</type_variable> <type_name>Boolean</type_name>\n" +
-                "patternDoNewtype = do\n" +
-                "  let <type_variable>X</type_variable> a = <type_variable>X</type_variable> 123\n" +
-                "  pure $ a == 123\n" +
-                "\n" +
-                "data <type_name>Y</type_name> = <type_name>Y Int String Boolean</type_name>\n" +
-                "\n" +
-                "-- Guards have access to current scope\n" +
-                "collatz2 = \\<type_variable>x</type_variable> <type_variable>y</type_variable> -> case x of\n" +
-                "  z | y > 0.0 -> z / 2.0\n" +
-                "  z -> z * 3.0 + 1.0\n" +
-                "\n" +
-                "<type_annotation_name>min</type_annotation_name> :: forall <type_variable>a</type_variable>. <type_name>Ord</type_name> <type_variable>a</type_variable> => <type_variable>a</type_variable> -> <type_variable>a</type_variable> -> <type_variable>a</type_variable>\n" +
-                "min n m | n < m     = n\n" +
-                "        | otherwise = m\n" +
-                "\n" +
-                "<type_annotation_name>max</type_annotation_name> :: forall <type_variable>a</type_variable>. <type_name>Ord</type_name> <type_variable>a</type_variable> => <type_variable>a</type_variable> -> <type_variable>a</type_variable> -> <type_variable>a</type_variable>\n" +
-                "max n m = case unit of\n" +
-                "  _ | m < n     -> n\n" +
-                "    | otherwise -> m\n" +
-                "\n" +
-                "<type_annotation_name>testIndentation</type_annotation_name> :: <type_name>Number</type_name> -> <type_name>Number</type_name> -> <type_name>Number</type_name>\n" +
-                "testIndentation x y | x > 0.0\n" +
-                "  = x + y\n" +
-                "                    | otherwise\n" +
-                "  = y - x\n" +
-                "\n" +
-                "-- pattern guard example with two clauses\n" +
-                "<type_annotation_name>clunky1</type_annotation_name> :: <type_name>Int</type_name> -> <type_name>Int</type_name> -> <type_name>Int</type_name>\n" +
-                "clunky1 a b | x <- max a b , x > 5 = x\n" +
-                "clunky1 a _ = a\n" +
-                "\n" +
-                "<type_annotation_name>clunky2</type_annotation_name> ::<type_name>Int</type_name> -> <type_name>Int</type_name> -> <type_name>Int</type_name>\n" +
-                "clunky2 a b | x <- max a b\n" +
-                "            , x > 5\n" +
-                "            = x\n" +
-                "            | otherwise\n" +
-                "            = a + b";
+                "def brackets_needed(a)\n" +
+                " a.is_a?(Array)\n" +
+                "end";
     }
 
     @Nullable

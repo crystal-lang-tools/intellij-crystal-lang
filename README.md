@@ -15,7 +15,13 @@ only the lexer and some very basic syntax highlighting are done - see screenshot
 
 Visit [intellij-crystal.github.io] to find documentation about installation and features.
 
+* Initial syntax highlighting
+
 ![example](https://github.com/intellij-crystal/intellij-crystal/raw/master/.README/ex1.png)
+
+* Initial AST tree for parser / grammar
+
+![example](https://github.com/intellij-crystal/intellij-crystal/raw/master/.README/ast1.png)
 
 ## FAQ
 

@@ -7,7 +7,9 @@
 
 ## Status
 
-This plugin is still in the **early stages of development** so only has a handful of features. But over time things will stabilize and more features will be added.
+This plugin is still in the **early stages of development** so only has a handful of features. But over time things will stabilize and more features will be added. Currently 
+only the lexer and some very basic syntax highlighting are done - see screenshot below.
+ 
  
 ## Usage
 

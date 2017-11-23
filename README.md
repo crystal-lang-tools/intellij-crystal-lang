@@ -1,9 +1,8 @@
-# Purescript plugin for the IntelliJ Platform
+# Crystal plugin for the IntelliJ Platform
 
 
-[![Build Status](https://travis-ci.org/intellij-purescript/intellij-purescript.svg?branch=master)](https://travis-ci.org/intellij-purescript/intellij-purescript)
+[![Build Status](https://travis-ci.org/intellij-crystal/intellij-crystal.svg?branch=master)](https://travis-ci.org/intellij-crystal/intellij-crystal)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/intellj-purescript/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
 
 ## Status
@@ -12,9 +11,9 @@ This plugin is still in the **early stages of development** so only has a handfu
  
 ## Usage
 
-Visit [intellij-purescript.github.io] to find documentation about installation and features.
+Visit [intellij-crystal.github.io] to find documentation about installation and features.
 
-![example](https://github.com/intellij-purescript/intellij-purescript/raw/master/.README/ex1.png)
+![example](https://github.com/intellij-crystal/intellij-crystal/raw/master/.README/ex1.png)
 
 ## FAQ
 

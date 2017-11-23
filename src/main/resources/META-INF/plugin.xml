@@ -26,6 +26,10 @@
     <!-- Add your extensions here -->
     <fileTypeFactory implementation="net.kenro.ji.jin.crystal.file.CrystalFileTypeFactory"/>
 
+    <lang.syntaxHighlighterFactory language="Crystal"
+                                   implementationClass="net.kenro.ji.jin.crystal.highlighting.CrystalSyntaxHighlighterFactory"/>
+
+
   </extensions>
 
   <actions>

@@ -26,10 +26,10 @@ public final class CrystalLexer extends LookAheadLexer {
                             break;
                         originalLexer.advance();
                     }
-                } else if (type == CrystalTokens.MLCOMMENT || type == CrystalTokens.SLCOMMENT || type == CrystalTokens.WS) {
+                } else if (type == CrystalTokens.SLCOMMENT || type == CrystalTokens.WS) {
                     while (true) {
                         type = originalLexer.getTokenType();
-                        if (type == CrystalTokens.MLCOMMENT || type == CrystalTokens.SLCOMMENT || type == CrystalTokens.WS) {
+                        if (type == CrystalTokens.SLCOMMENT || type == CrystalTokens.WS) {
                             originalLexer.advance();
                         } else {
                             break;

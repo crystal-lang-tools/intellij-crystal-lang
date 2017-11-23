@@ -53,14 +53,6 @@ charControl = "^" [:uppercase:]
 
 %%
 
-<COMMENT> {
-
-"{-"                           { comment_nesting++; return MLCOMMENT; }
-"-}"                           { comment_nesting--; if (comment_nesting == 0) yybegin(YYINITIAL); return MLCOMMENT; }
-[^]                            { return MLCOMMENT; }
-
-}
-
 <STRINGS> {
 "\""                           { yybegin(YYINITIAL); return STRING; }
 {stringChar}                   { return STRING; }
@@ -80,7 +72,6 @@ charControl = "^" [:uppercase:]
 
 {whitespace}+                  { return WS; }
 
-"{-"                           { yybegin(COMMENT); comment_nesting = 1; return MLCOMMENT; }
 "--" [^\n]*                    { return SLCOMMENT; }
 
 
@@ -127,6 +118,7 @@ charControl = "^" [:uppercase:]
   "%}"               { return MACRO_BLOCK_CLOSE; }
   "{%"               { return MACRO_BLOCK_OPEN; }
   "{{"               { return MACRO_STATEMENT_OPEN; }
+  "}}"               { return MACRO_STATEMENT_CLOSE; }
   "[]="              { return ARRAY_EQUAL; }
   "[]?"              { return ARRAY_BOOL; }
   "[]"               { return ARRAY; }
@@ -147,6 +139,7 @@ charControl = "^" [:uppercase:]
   "^="               { return CAROT_EQUAL; }
   "^"                { return CAROT; }
   "@["               { return AT_BRACKET; }
+  "@"                { return AT; }
   "$~"               { return DOLLAR_TILDE; }
   "$?"               { return DOLLAR_QUESTION; }
   "case"             { return CASE; }
@@ -166,6 +159,42 @@ charControl = "^" [:uppercase:]
   "true"             { return TRUE; }
   "false"            { return FALSE; }
   "raise"            { return RAISE; }
+
+  "include"          { return INCLUDE; }
+  "extend"           { return EXTEND; }
+  "return"           { return RETURN; }
+  "begin"            { return BEGIN; }
+  "lib"              { return LIB; }
+  "fun"              { return FUN; }
+  "type"             { return TYPE; }
+  "struct"           { return STRUCT; }
+  "union"            { return UNION; }
+  "enum"             { return ENUM; }
+  "macro"            { return MACRO; }
+  "out"              { return OUT; }
+  "as"               { return AS; }
+  "as?"              { return AS_QUESTION; }
+  "typeof"           { return TYPEOF; }
+  "for"              { return FOR; }
+  "select"           { return SELECT; }
+  "then"             { return THEN; }
+  "rescue"           { return RESCUE; }
+  "ensure"           { return ENSURE; }
+  "is_a?"            { return IS_A_QUESTION; }
+  "alias"            { return ALIAS; }
+  "sizeof"           { return SIZEOF; }
+  "nil?"             { return NIL_QUESTION; }
+  "in"               { return IN; }
+  "with"             { return WITH; }
+  "self"             { return SELF; }
+  "super"            { return SUPER; }
+  "private"          { return PRIVATE; }
+  "asm"              { return ASM; }
+  "protected"        { return PROTECTED; }
+  "uninitialized"    { return UNINITIALIZED; }
+  "instance_sizeof"  { return INSTANCE_SIZEOF; }
+  "abstract"         { return ABSTRACT; }
+  "pointerof"        { return POINTEROF; }
 
 "0"({hexadecimal}|{octal}|{decimal})|{decimal} { return NUMBER; }
 {decimal}{fractExponent}       { return FLOAT; }

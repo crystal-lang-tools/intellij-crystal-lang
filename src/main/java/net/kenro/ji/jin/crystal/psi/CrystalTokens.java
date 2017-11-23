@@ -6,7 +6,6 @@ public interface CrystalTokens {
     CrystalElementType ERROR = new CrystalElementType("error");
     CrystalElementType UNICODE = new CrystalElementType("unicode");
     CrystalElementType WS = new CrystalElementType("whitespace");
-    CrystalElementType MLCOMMENT = new CrystalElementType("block comment");
     CrystalElementType SLCOMMENT = new CrystalElementType("line comment");
 
     CrystalElementType LEFT_BRACE = new CrystalElementType("{");
@@ -15,6 +14,7 @@ public interface CrystalTokens {
     CrystalElementType RIGHT_PAREN = new CrystalElementType(")");
     CrystalElementType LEFT_BRACKET = new CrystalElementType("[");
     CrystalElementType RIGHT_BRACKET = new CrystalElementType("]");
+
     CrystalElementType DOT = new CrystalElementType(".");
     CrystalElementType PIPE = new CrystalElementType("|");
     CrystalElementType COMMA = new CrystalElementType(",");
@@ -48,12 +48,10 @@ public interface CrystalTokens {
     CrystalElementType DIVIDE_EQUAL = new CrystalElementType("/=");
     CrystalElementType DIVIDE = new CrystalElementType("/");
     CrystalElementType MODULO_EQUAL = new CrystalElementType("%=");
-
-    CrystalElementType MODULE = new CrystalElementType("module");
-
     CrystalElementType MACRO_BLOCK_CLOSE = new CrystalElementType("%}");
     CrystalElementType MACRO_BLOCK_OPEN = new CrystalElementType("%");
     CrystalElementType MACRO_STATEMENT_OPEN = new CrystalElementType("{{");
+    CrystalElementType MACRO_STATEMENT_CLOSE = new CrystalElementType("}}");
     CrystalElementType ARRAY_EQUAL = new CrystalElementType("[]=");
     CrystalElementType ARRAY_BOOL = new CrystalElementType("[]?");
     CrystalElementType ARRAY = new CrystalElementType("[]");
@@ -74,9 +72,11 @@ public interface CrystalTokens {
     CrystalElementType CAROT_EQUAL = new CrystalElementType("^=");
     CrystalElementType CAROT = new CrystalElementType("^");
     CrystalElementType AT_BRACKET = new CrystalElementType("@[");
+    CrystalElementType AT = new CrystalElementType("@");
     CrystalElementType DOLLAR_TILDE = new CrystalElementType("$~");
     CrystalElementType DOLLAR_QUESTION = new CrystalElementType("$?");
 
+    CrystalElementType MODULE = new CrystalElementType("module");
     CrystalElementType CASE = new CrystalElementType("case");
     CrystalElementType CLASS = new CrystalElementType("class");
     CrystalElementType DEF = new CrystalElementType("def");
@@ -94,6 +94,41 @@ public interface CrystalTokens {
     CrystalElementType TRUE = new CrystalElementType("true");
     CrystalElementType FALSE = new CrystalElementType("false");
     CrystalElementType RAISE = new CrystalElementType("raise");
+    CrystalElementType INCLUDE = new CrystalElementType("include");
+    CrystalElementType EXTEND = new CrystalElementType("extend");
+    CrystalElementType RETURN = new CrystalElementType("return");
+    CrystalElementType BEGIN = new CrystalElementType("begin");
+    CrystalElementType LIB = new CrystalElementType("lib");
+    CrystalElementType FUN = new CrystalElementType("fun");
+    CrystalElementType TYPE = new CrystalElementType("type");
+    CrystalElementType STRUCT = new CrystalElementType("struct");
+    CrystalElementType UNION = new CrystalElementType("union");
+    CrystalElementType ENUM = new CrystalElementType("enum");
+    CrystalElementType MACRO = new CrystalElementType("macro");
+    CrystalElementType OUT = new CrystalElementType("out");
+    CrystalElementType AS = new CrystalElementType("as");
+    CrystalElementType AS_QUESTION = new CrystalElementType("as?");
+    CrystalElementType TYPEOF = new CrystalElementType("typeof");
+    CrystalElementType FOR = new CrystalElementType("for");
+    CrystalElementType SELECT = new CrystalElementType("select");
+    CrystalElementType THEN = new CrystalElementType("then");
+    CrystalElementType RESCUE = new CrystalElementType("rescue");
+    CrystalElementType ENSURE = new CrystalElementType("ensure");
+    CrystalElementType IS_A_QUESTION = new CrystalElementType("is_a?");
+    CrystalElementType ALIAS = new CrystalElementType("alias");
+    CrystalElementType SIZEOF = new CrystalElementType("sizeof");
+    CrystalElementType NIL_QUESTION = new CrystalElementType("nil?");
+    CrystalElementType IN = new CrystalElementType("in");
+    CrystalElementType WITH = new CrystalElementType("with");
+    CrystalElementType SELF = new CrystalElementType("self");
+    CrystalElementType SUPER = new CrystalElementType("super");
+    CrystalElementType PRIVATE = new CrystalElementType("private");
+    CrystalElementType ASM = new CrystalElementType("asm");
+    CrystalElementType PROTECTED = new CrystalElementType("protected");
+    CrystalElementType UNINITIALIZED = new CrystalElementType("uninitialized");
+    CrystalElementType INSTANCE_SIZEOF = new CrystalElementType("instance_sizeof");
+    CrystalElementType ABSTRACT = new CrystalElementType("abstract");
+    CrystalElementType POINTEROF = new CrystalElementType("pointerof");
 
     CrystalElementType STRING = new CrystalElementType("string");
     CrystalElementType STRING_ESCAPED = new CrystalElementType("string escaping");
@@ -105,11 +140,19 @@ public interface CrystalTokens {
     CrystalElementType IDENT = new CrystalElementType("identifier");
     CrystalElementType PROPER_NAME = new CrystalElementType("proper name");
 
-//    TokenSet kKeywords = TokenSet.create(DATA, NEWTYPE, TYPE, FOREIGN, IMPORT, INFIXL, INFIXR, INFIX, CLASS, DERIVE ,INSTANCE,
-//            MODULE, CASE, OF, IF, THEN, ELSE, DO, LET, TRUE, FALSE, IN, WHERE, FORALL, QUALIFIED, HIDING, AS, START,
-//            BANG);
-//    TokenSet kStrings = TokenSet.create(STRING);
-//    TokenSet kOperators = TokenSet.create(DARROW, LDARROW, ARROW, EQ, DOT, OPTIMISTIC, OPERATOR);
+    TokenSet keyWords = TokenSet.create(CASE, CLASS, DEF, DO, ELSE, END, IF, NIL, OF, REQUIRE, WHEN, YIELD, UNTIL, ELSIF, TRUE, FALSE, RAISE,
+              INCLUDE, EXTEND, RETURN, BEGIN, LIB, FUN, TYPE, STRUCT, UNION, ENUM, MACRO, OUT, AS, AS_QUESTION, TYPEOF, FOR, SELECT, THEN,
+              RESCUE, ENSURE, IS_A_QUESTION, ALIAS, SIZEOF, NIL_QUESTION, IN, WITH, SELF, SUPER, PRIVATE, ASM, PROTECTED, UNINITIALIZED,
+              INSTANCE_SIZEOF, ABSTRACT, POINTEROF);
+
+    TokenSet brackets = TokenSet.create(LEFT_BRACE, RIGHT_BRACE, LEFT_PAREN, RIGHT_PAREN, LEFT_BRACKET, RIGHT_BRACKET);
+
+    TokenSet operators = TokenSet.create(DOT, PIPE, COMMA, EQUAL, EQUAL_EQUAL, EQUAL_EQUAL_EQUAL, BACKSLASH, RIGHT_ARROW, APROX_ARROW, NOT_EQUAL,
+            NOT_APROX, NOT, LEFT_RIGHT_ARROW, LEFT_ARROW, LEFT_LEFT_ARROW, INSERT, LESS, GREATER_EQUAL, GREATER_GREATER_EQUAL, GREATER_GREATER, GREATER,
+            PLUS, PLUS_EQUAL, MINUS_EQUAL, MINUS_GREATER, MINUS, TIMES_EQUAL, TIMES_TIMES_EQUAL, TIMES_TIMES, TIMES, DIVIDE, DIVIDE_EQUAL, MODULO_EQUAL,
+            MACRO_BLOCK_CLOSE, MACRO_BLOCK_OPEN, MACRO_STATEMENT_OPEN, MACRO_STATEMENT_CLOSE, ARRAY_EQUAL, ARRAY_BOOL, ARRAY, QUESTION, SEMICOLON,
+            NAMESPACE, COLON, TILDE, DOT_DOT, DOT_DOT_DOT, AND, AND_AND, AND_AND_EQUAL, AND_EQUAL, OR_OR, OR_EQUAL, OR_OR_EQUAL, CAROT, CAROT_EQUAL,
+            AT_BRACKET, AT, DOLLAR_TILDE, DOLLAR_QUESTION);
 
     CrystalElementType EOF = new CrystalElementType("<<eof>>");
 }

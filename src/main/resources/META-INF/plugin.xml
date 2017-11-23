@@ -26,6 +26,11 @@
     <!-- Add your extensions here -->
     <fileTypeFactory implementation="net.kenro.ji.jin.crystal.file.CrystalFileTypeFactory"/>
 
+    <lang.parserDefinition language="Crystal" implementationClass="net.kenro.ji.jin.crystal.parser.CrystalParserDefinition"/>
+
+    <lang.elementManipulator forClass="net.kenro.ji.jin.crystal.psi.cst.CrystalASTWrapperElement"
+                             implementationClass="net.kenro.ji.jin.crystal.psi.cst.CrystalStringManipulator"/>
+
     <lang.syntaxHighlighterFactory language="Crystal"
                                    implementationClass="net.kenro.ji.jin.crystal.highlighting.CrystalSyntaxHighlighterFactory"/>
 

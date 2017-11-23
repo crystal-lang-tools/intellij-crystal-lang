@@ -42,3 +42,22 @@ coming soon
 3. ./generate_parser.sh
 4. ./gradlew build
 5. open in intellij
+
+### Testing notes
+
+for the parser:
+
+* checkout the crystal source code
+
+```
+git clone https://github.com/crystal-lang/crystal.git
+```
+
+* copy all the cr files into a new dir
+
+```
+ cd crystal
+ mkdir cr_code
+ find . -name \*.cr -exec cp {} cr_code \;
+ mv cr_code/*.cr path/to/intellij-crystal/src/test/resources/gold/parser/
+``` 

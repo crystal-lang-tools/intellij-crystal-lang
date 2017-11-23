@@ -1,0 +1,10 @@
+Crystal File
+  CrystalASTWrapperElement(Program)
+    CrystalASTWrapperElement(Module)
+      PsiElement(module)('module')
+      PsiElement(whitespace)(' ')
+      CrystalASTWrapperElement(ProgramModule)
+        CrystalASTWrapperElement(ProperName)
+          PsiElement(proper name)('Initial')
+          PsiElement(whitespace)('\n')
+      PsiElement(end)('end')

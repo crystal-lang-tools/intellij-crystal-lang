@@ -72,7 +72,7 @@ charControl = "^" [:uppercase:]
 
 {whitespace}+                  { return WS; }
 
-"--" [^\n]*                    { return SLCOMMENT; }
+"#" [^\n]*                    { return SLCOMMENT; }
 
 
   "{"                { return LEFT_BRACE; }

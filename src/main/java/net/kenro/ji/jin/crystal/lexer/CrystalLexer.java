@@ -13,7 +13,7 @@ public final class CrystalLexer extends LookAheadLexer {
 
     private static final class MergedPureLexer extends MergingLexerAdapterBase {
         public MergedPureLexer() {
-            super(new FlexAdapter(new _PSLexer((Reader) null)));
+            super(new FlexAdapter(new net.kenro.ji.jin.crystal.lexer._CrystalLexer((Reader) null)));
         }
 
         private static final MergeFunction mergeFunction = new MergeFunction() {

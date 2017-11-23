@@ -3,21 +3,24 @@ package net.kenro.ji.jin.crystal.psi;
 import com.intellij.psi.tree.TokenSet;
 
 public interface CrystalTokens {
+    CrystalElementType ERROR = new CrystalElementType("error");
+    CrystalElementType UNICODE = new CrystalElementType("unicode");
     CrystalElementType WS = new CrystalElementType("whitespace");
     CrystalElementType MLCOMMENT = new CrystalElementType("block comment");
     CrystalElementType SLCOMMENT = new CrystalElementType("line comment");
 
-    CrystalElementType LEFT_CURLY = new CrystalElementType("{");
-    CrystalElementType RIGHT_CURLY = new CrystalElementType("}");
+    CrystalElementType LEFT_BRACE = new CrystalElementType("{");
+    CrystalElementType RIGHT_BRACE = new CrystalElementType("}");
     CrystalElementType LEFT_PAREN = new CrystalElementType("(");
     CrystalElementType RIGHT_PAREN = new CrystalElementType(")");
     CrystalElementType LEFT_BRACKET = new CrystalElementType("[");
     CrystalElementType RIGHT_BRACKET = new CrystalElementType("]");
     CrystalElementType DOT = new CrystalElementType(".");
+    CrystalElementType PIPE = new CrystalElementType("|");
     CrystalElementType COMMA = new CrystalElementType(",");
-    CrystalElementType EQ = new CrystalElementType("=");
-    CrystalElementType EQ_EQ = new CrystalElementType("==");
-    CrystalElementType EQ_EQ_EQ = new CrystalElementType("===");
+    CrystalElementType EQUAL = new CrystalElementType("=");
+    CrystalElementType EQUAL_EQUAL = new CrystalElementType("==");
+    CrystalElementType EQUAL_EQUAL_EQUAL = new CrystalElementType("===");
     CrystalElementType BACKSLASH = new CrystalElementType("\\");
     CrystalElementType RIGHT_ARROW = new CrystalElementType("=>");
     CrystalElementType APROX_ARROW = new CrystalElementType("=~");
@@ -85,7 +88,7 @@ public interface CrystalTokens {
     CrystalElementType OF = new CrystalElementType("of");
     CrystalElementType REQUIRE = new CrystalElementType("require");
     CrystalElementType WHEN = new CrystalElementType("when");
-    CrystalElementType YEILD = new CrystalElementType("yield");
+    CrystalElementType YIELD = new CrystalElementType("yield");
     CrystalElementType UNTIL = new CrystalElementType("until");
     CrystalElementType ELSIF = new CrystalElementType("elsif");
     CrystalElementType TRUE = new CrystalElementType("true");
@@ -100,6 +103,7 @@ public interface CrystalTokens {
     CrystalElementType FLOAT = new CrystalElementType("float");
 
     CrystalElementType IDENT = new CrystalElementType("identifier");
+    CrystalElementType PROPER_NAME = new CrystalElementType("proper name");
 
 //    TokenSet kKeywords = TokenSet.create(DATA, NEWTYPE, TYPE, FOREIGN, IMPORT, INFIXL, INFIXR, INFIX, CLASS, DERIVE ,INSTANCE,
 //            MODULE, CASE, OF, IF, THEN, ELSE, DO, LET, TRUE, FALSE, IN, WHERE, FORALL, QUALIFIED, HIDING, AS, START,

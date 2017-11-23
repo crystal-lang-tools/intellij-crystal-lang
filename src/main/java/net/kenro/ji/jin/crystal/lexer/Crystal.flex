@@ -7,7 +7,7 @@ import static net.kenro.ji.jin.crystal.psi.CrystalTokens.*;
 %%
 
 %unicode
-%class _PSLexer
+%class _CrystalLexer
 %implements FlexLexer
 %function advance
 %type IElementType
@@ -19,7 +19,6 @@ return;
 %eof}
 
 whitespace = [ \t\f\r\n]
-opChars = [\:\!#\$%&*+./<=>?@\\\^|\-~]
 identStart = [:lowercase:]|"_"
 identLetter = [:letter:]|[:digit:]|[_\']
 properStart = [:uppercase:]
@@ -84,79 +83,98 @@ charControl = "^" [:uppercase:]
 "{-"                           { yybegin(COMMENT); comment_nesting = 1; return MLCOMMENT; }
 "--" [^\n]*                    { return SLCOMMENT; }
 
-"data"                         { return DATA; }
-"type"                         { return TYPE; }
-"newtype"                      { return NEWTYPE; }
-"foreign"                      { return FOREIGN; }
-"import"                       { return IMPORT; }
-"infixl"                       { return INFIXL; }
-"infixr"                       { return INFIXR; }
-"infix"                        { return INFIX; }
-"class"                        { return CLASS; }
-"instance"                     { return INSTANCE; }
-"derive"                       { return DERIVE; }
-"module"                       { return MODULE; }
-"case"                         { return CASE; }
-"of"                           { return OF; }
-"if"                           { return IF; }
-"then"                         { return THEN; }
-"else"                         { return ELSE; }
-"do"                           { return DO; }
-"let"                          { return LET; }
-"true"                         { return TRUE; }
-"false"                        { return FALSE; }
-"in"                           { return IN; }
-"where"                        { return WHERE; }
-"∀"                            { return FORALL; }
-"forall"                       { return FORALL; }
-"\\u2200"                      { return FORALL; }
-"\u2200"                       { return FORALL; }
-"qualified"                    { return QUALIFIED; }
-"hiding"                       { return HIDING; }
-"as"                           { return AS; }
 
-"=>"                           { return DARROW; }
-"\\u21D2"                      { return DARROW; }
-"\u21D2"                       { return DARROW; }
-"<="                           { return LDARROW; }
-"\\u21D0"                      { return LDARROW; }
-"\u21D0"                       { return LDARROW; }
-"->"                           { return ARROW; }
-"\\u2192"                      { return ARROW; }
-"\u2192"                       { return ARROW; }
-"<-"                           { return LARROW; }
-"\\u2190"                      { return LARROW; }
-"\u2190"                       { return LARROW; }
-"="                            { return EQ; }
-"."                            { return DOT; }
-"\\"                           { return BACKSLASH; }
+  "{"                { return LEFT_BRACE; }
+  "}"                { return RIGHT_BRACE; }
+  "("                { return LEFT_PAREN; }
+  ")"                { return RIGHT_PAREN; }
+  "["                { return LEFT_BRACKET; }
+  "]"                { return RIGHT_BRACKET; }
+  "|"                { return PIPE; }
+  "."                { return DOT; }
+  ","                { return COMMA; }
+  "="                { return EQUAL; }
+  "=="               { return EQUAL_EQUAL; }
+  "==="              { return EQUAL_EQUAL_EQUAL; }
+  "\\"               { return BACKSLASH; }
+  "=>"               { return RIGHT_ARROW; }
+  "=~"               { return APROX_ARROW; }
+  "!="               { return NOT_EQUAL; }
+  "!~"               { return NOT_APROX; }
+  "!"                { return NOT; }
+  "<=>"              { return LEFT_RIGHT_ARROW; }
+  "<="               { return LEFT_ARROW; }
+  "<<="              { return LEFT_LEFT_ARROW; }
+  "<<"               { return INSERT; }
+  "<"                { return LESS; }
+  ">="               { return GREATER_EQUAL; }
+  ">>="              { return GREATER_GREATER_EQUAL; }
+  ">>"               { return GREATER_GREATER; }
+  ">"                { return GREATER; }
+  "+="               { return PLUS_EQUAL; }
+  "+"                { return PLUS; }
+  "-="               { return MINUS_EQUAL; }
+  "->"               { return MINUS_GREATER; }
+  "-"                { return MINUS; }
+  "*="               { return TIMES_EQUAL; }
+  "**="              { return TIMES_TIMES_EQUAL; }
+  "**"               { return TIMES_TIMES; }
+  "*"                { return TIMES; }
+  "/="               { return DIVIDE_EQUAL; }
+  "/"                { return DIVIDE; }
+  "%="               { return MODULO_EQUAL; }
+  "module"           { return MODULE; }
+  "%}"               { return MACRO_BLOCK_CLOSE; }
+  "{%"               { return MACRO_BLOCK_OPEN; }
+  "{{"               { return MACRO_STATEMENT_OPEN; }
+  "[]="              { return ARRAY_EQUAL; }
+  "[]?"              { return ARRAY_BOOL; }
+  "[]"               { return ARRAY; }
+  "?"                { return QUESTION; }
+  ";"                { return SEMICOLON; }
+  "::"               { return NAMESPACE; }
+  ":"                { return COLON; }
+  "~"                { return TILDE; }
+  "..."              { return DOT_DOT_DOT; }
+  ".."               { return DOT_DOT; }
+  "&&="              { return AND_AND_EQUAL; }
+  "&&"               { return AND_AND; }
+  "&="               { return AND_EQUAL; }
+  "&"                { return AND; }
+  "||="              { return OR_OR_EQUAL; }
+  "||"               { return OR_OR; }
+  "|="               { return OR_EQUAL; }
+  "^="               { return CAROT_EQUAL; }
+  "^"                { return CAROT; }
+  "@["               { return AT_BRACKET; }
+  "$~"               { return DOLLAR_TILDE; }
+  "$?"               { return DOLLAR_QUESTION; }
+  "case"             { return CASE; }
+  "class"            { return CLASS; }
+  "def"              { return DEF; }
+  "do"               { return DO; }
+  "else"             { return ELSE; }
+  "end"              { return END; }
+  "if"               { return IF; }
+  "nil"              { return NIL; }
+  "of"               { return OF; }
+  "require"          { return REQUIRE; }
+  "when"             { return WHEN; }
+  "yield"            { return YIELD; }
+  "until"            { return UNTIL; }
+  "elsif"            { return ELSIF; }
+  "true"             { return TRUE; }
+  "false"            { return FALSE; }
+  "raise"            { return RAISE; }
 
-";"                            { return SEMI; }
-"::"                           { return DCOLON; }
-"∷"                            { return DCOLON; }
-"`"                            { return TICK; }
-"|"                            { return PIPE; }
-
-","                            { return COMMA; }
-"("                            { return LPAREN; }
-")"                            { return RPAREN; }
-"["                            { return LBRACK; }
-"]"                            { return RBRACK; }
-"{"                            { return LCURLY; }
-"}"                            { return RCURLY; }
-".."                           { return DDOT; }
-
-"~>"                           {return OPTIMISTIC; }
-
-"0"({hexadecimal}|{octal}|{decimal})|{decimal} { return NATURAL; }
+"0"({hexadecimal}|{octal}|{decimal})|{decimal} { return NUMBER; }
 {decimal}{fractExponent}       { return FLOAT; }
 "\"\"\""                       { yybegin(BLOCK_STRINGS); return STRING; }
 "\""                           { yybegin(STRINGS); return STRING; }
 
 {identStart}{identLetter}*     { return IDENT; }
 {properName}                   { return PROPER_NAME; }
-{uniCode}+                     { return OPERATOR; }
-{opChars}+                     { return OPERATOR; }
+{uniCode}+                     { return UNICODE; }
 
 .                              { return ERROR; }
 }

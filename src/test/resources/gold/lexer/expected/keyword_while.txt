@@ -1,0 +1,7 @@
+identifier ('while')
+whitespace (' ')
+identifier ('some_condition')
+whitespace ('\n  ')
+identifier ('do_this')
+whitespace ('\n')
+end ('end')

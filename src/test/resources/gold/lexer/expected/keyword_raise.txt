@@ -1,0 +1,8 @@
+raise ('raise')
+whitespace (' ')
+string ('"')
+string ('o')
+string ('o')
+string ('p')
+string ('s')
+string ('"')

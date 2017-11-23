@@ -1,0 +1,5 @@
+class ('class')
+whitespace (' ')
+proper name ('Person')
+whitespace ('\n')
+end ('end')

@@ -1,0 +1,8 @@
+require ('require')
+whitespace (' ')
+string ('"')
+string ('s')
+string ('p')
+string ('e')
+string ('c')
+string ('"')

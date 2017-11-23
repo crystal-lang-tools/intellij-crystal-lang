@@ -43,13 +43,7 @@ charNum = {decimal} | "x" [0-9a-zA-Z]+ | "o" [0-7]+
 charAscii = "BS"|"HT"|"LF"|"VT"|"FF"|"CR"|"SO"|"SI"|"EM"|"FS"|"GS"|"RS"|"US"|"SP"|"NUL"|"SOH"|"STX"|"ETX"|"EOT"|"ENQ"|"ACK"|"BEL"|"DLE"|"DC1"|"DC2"|"DC3"|"DC4"|"NAK"|"SYN"|"ETB"|"CAN"|"SUB"|"ESC"|"DEL"
 charControl = "^" [:uppercase:]
 
-%x COMMENT, STRINGS, BLOCK_STRINGS
-
-%{
-   int comment_nesting = 0;
-   int yyline = 0;
-   int yycolumn = 0;
-%}
+%x STRINGS, BLOCK_STRINGS
 
 %%
 

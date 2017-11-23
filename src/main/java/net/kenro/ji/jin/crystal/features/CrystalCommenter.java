@@ -14,25 +14,25 @@ public class CrystalCommenter implements Commenter {
     @Nullable
     @Override
     public String getBlockCommentPrefix() {
-        return "#";
+        return "";
     }
 
     @Nullable
     @Override
     public String getBlockCommentSuffix() {
-        return "#";
+        return null;
     }
 
     @Nullable
     @Override
     public String getCommentedBlockCommentPrefix() {
-        return "#";
+        return null;
     }
 
     @Nullable
     @Override
     public String getCommentedBlockCommentSuffix() {
-        return "#";
+        return null;
     }
 }
 

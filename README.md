@@ -43,6 +43,10 @@ Features for later on:
 * code formatting
 * code auto completion
 
+## Releases
+
+* An initial alpha release with just the lexer and basic syntax highlighting is in the [Jetbrains plugin repo](https://plugins.jetbrains.com/plugin/10213-crystal-language-plugin)
+* Hopefully there will be a release every few months going forward 
 
 ## FAQ
 

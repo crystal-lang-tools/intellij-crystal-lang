@@ -23,6 +23,27 @@ Visit [intellij-crystal.github.io] to find documentation about installation and 
 
 ![example](https://github.com/intellij-crystal/intellij-crystal/raw/master/.README/ast1.png)
 
+## Roadmap
+
+The following features will evolve over the next few months:
+
+* full lexer - with tests
+* full grammar parser - with tests
+* default syntax highlighting color scheme - based on Atom light theme
+* darcula syntax highlighting color scheme - based on Atom dark theme
+* working commenter
+* Go to definition
+* jump to implementation
+* refactor - rename
+
+Features for later on:
+
+* crystal intellij project type
+* compiler support and run configurations
+* code formatting
+* code auto completion
+
+
 ## FAQ
 
 coming soon 

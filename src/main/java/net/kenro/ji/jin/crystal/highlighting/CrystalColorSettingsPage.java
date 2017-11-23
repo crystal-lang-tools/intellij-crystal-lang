@@ -99,7 +99,7 @@ public class CrystalColorSettingsPage implements ColorSettingsPage {
     @NotNull
     @Override
     public String getDisplayName() {
-        return "Purescript";
+        return "Crystal";
     }
 }
 

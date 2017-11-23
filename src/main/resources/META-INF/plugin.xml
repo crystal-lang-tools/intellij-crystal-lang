@@ -29,6 +29,8 @@
     <lang.syntaxHighlighterFactory language="Crystal"
                                    implementationClass="net.kenro.ji.jin.crystal.highlighting.CrystalSyntaxHighlighterFactory"/>
 
+    <colorSettingsPage
+            implementation="net.kenro.ji.jin.crystal.highlighting.CrystalColorSettingsPage" />
 
   </extensions>
 

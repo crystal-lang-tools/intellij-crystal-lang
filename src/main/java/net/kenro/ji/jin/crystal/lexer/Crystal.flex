@@ -196,6 +196,64 @@ charControl = "^" [:uppercase:]
   "abstract"         { return ABSTRACT; }
   "pointerof"        { return POINTEROF; }
 
+
+  "initialize"       { return INITIALIZE; }
+  "new"              { return NEW; }
+  "loop"             { return LOOP; }
+  "prepend"          { return PREPEND; }
+  "fail"             { return FAIL; }
+  "getter"           { return GETTER; }
+  "setter"           { return SETTER; }
+  "property"         { return PROPERTY; }
+  "catch"            { return CATCH; }
+  "throw"            { return THROW; }
+  "abort"            { return ABORT; }
+  "at_exit"          { return AT_EXIT; }
+  "autoload"         { return AUTOLOAD; }
+  "binding"          { return BINDING; }
+  "callcc"           { return CALLCC; }
+  "caller"           { return  CALLER; }
+  "caller_locations" { return CALLER_LOCATIONS; }
+  "chomp"            { return CHOMP; }
+  "chop"             { return CHOP; }
+  "eval"             { return EVAL; }
+  "exec"             { return EXEC; }
+  "exit"             { return EXIT; }
+  "exit!"            { return EXIT_BANG; }
+  "fork"             { return FORK; }
+  "format"           { return FORMAT; }
+  "gets"             { return GETS; }
+  "global_variables" { return GLOBAL_VARIABLES; }
+  "gsub"             { return GSUB; }
+  "iterator"         { return ITERATOR; }
+  "lambda"           { return LAMBDA; }
+  "load"             { return LOAD; }
+  "local_variables"  { return LOCAL_VARIABLES; }
+  "open"             { return OPEN; }
+  "p"                { return P; }
+  "print"            { return PRINT; }
+  "printf"           { return PRINTF; }
+  "proc"             { return PROC; }
+  "putc"             { return PUTC; }
+  "puts"             { return PUTS; }
+  "rand"             { return RAND; }
+  "readline"         { return READLINE; }
+  "readlines"        { return READLINES; }
+  "set_trace_func"   { return SET_TRACE_FUNC; }
+  "sleep"            { return SLEEP; }
+  "spawn"            { return SPAWN; }
+  "sprintf"          { return SPRINTF; }
+  "srand"            { return SRAND; }
+  "sub"              { return SUB; }
+  "syscall"          { return SYSCALL; }
+  "system"           { return SYSTEM; }
+  "test"             { return TEST; }
+  "trace_var"        { return TRACE_VAR; }
+  "trap"             { return TRAP; }
+  "untrace_var"      { return UNTRACE_VAR; }
+  "warn"             { return WARN; }
+
+
 "0"({hexadecimal}|{octal}|{decimal})|{decimal} { return NUMBER; }
 {decimal}{fractExponent}       { return FLOAT; }
 "\"\"\""                       { yybegin(BLOCK_STRINGS); return STRING; }

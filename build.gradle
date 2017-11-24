@@ -99,6 +99,7 @@ allprojects {
             channels publishChannels
         }
 
+        ideaDependencyCachePath './distros'
         prepareSandbox {
             copy {
                 from './PsiViewer.jar'

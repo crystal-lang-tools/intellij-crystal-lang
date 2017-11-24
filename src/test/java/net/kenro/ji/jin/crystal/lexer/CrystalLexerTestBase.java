@@ -10,6 +10,7 @@ import com.intellij.rt.execution.junit.FileComparisonFailure;
 import com.intellij.testFramework.LexerTestCase;
 import com.intellij.testFramework.TestDataFile;
 import com.intellij.testFramework.VfsTestUtil;
+import net.kenro.ji.jin.crystal.parser._CrystalLexer;
 import org.jetbrains.annotations.NonNls;
 
 import java.io.File;
@@ -50,7 +51,7 @@ public class CrystalLexerTestBase extends LexerTestCase {
 
     @Override
     protected Lexer createLexer() {
-        return new FlexAdapter(new net.kenro.ji.jin.crystal.lexer._CrystalLexer(null));
+        return new FlexAdapter(new _CrystalLexer(null));
     }
 
     @Override

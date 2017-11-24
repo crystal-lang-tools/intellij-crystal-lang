@@ -1,10 +1,11 @@
 package net.kenro.ji.jin.crystal.lexer;
 
 import com.intellij.lexer.FlexAdapter;
+import net.kenro.ji.jin.crystal.parser._CrystalLexer;
 
 public class CrystalHighlightLexer extends FlexAdapter {
     public CrystalHighlightLexer() {
-        super(new net.kenro.ji.jin.crystal.lexer._CrystalLexer(null));
+        super(new _CrystalLexer(null));
     }
 }
 

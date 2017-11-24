@@ -1,14 +1,11 @@
 package net.kenro.ji.jin.crystal.highlighting;
 
-import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
-import com.intellij.psi.tree.TokenSet;
 import net.kenro.ji.jin.crystal.icons.CrystalIcons;
-import net.kenro.ji.jin.crystal.psi.CrystalTokens;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

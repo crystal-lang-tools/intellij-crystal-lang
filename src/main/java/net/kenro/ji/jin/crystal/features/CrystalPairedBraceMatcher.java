@@ -3,16 +3,17 @@ package net.kenro.ji.jin.crystal.features;
 import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import net.kenro.ji.jin.crystal.psi.CrystalTokens;
+import net.kenro.ji.jin.crystal.psi.CrystalElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CrystalPairedBraceMatcher implements PairedBraceMatcher {
     private static final BracePair[] PAIRS = new BracePair[] {
-            new BracePair(CrystalTokens.LEFT_BRACE, CrystalTokens.RIGHT_BRACE, true),
-            new BracePair(CrystalTokens.LEFT_BRACKET, CrystalTokens.RIGHT_BRACKET, true),
-            new BracePair(CrystalTokens.LEFT_PAREN, CrystalTokens.RIGHT_PAREN, false)
+            new BracePair(CrystalElementTypes.LEFT_BRACE, CrystalElementTypes.RIGHT_BRACE, true),
+            new BracePair(CrystalElementTypes.LEFT_BRACKET, CrystalElementTypes.RIGHT_BRACKET, true),
+            new BracePair(CrystalElementTypes.LEFT_PAREN, CrystalElementTypes.RIGHT_PAREN, false)
     };
 
     @Override
@@ -23,7 +24,7 @@ public class CrystalPairedBraceMatcher implements PairedBraceMatcher {
     @Override
     public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType) {
         return contextType == null
-                || contextType == CrystalTokens.WS;
+                || contextType == TokenType.WHITE_SPACE;
     }
 
     @Override

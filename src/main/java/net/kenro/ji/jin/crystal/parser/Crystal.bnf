@@ -1,15 +1,19 @@
 {
     parserClass='net.kenro.ji.jin.crystal.CrystalParser'
 
-    elementTypeHolderClass='net.kenro.ji.jin.crystal.psi.CrystalCompositeElementTypes'
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
-    elementTypeClass='net.kenro.ji.jin.crystal.psi.CrystalCompositeElementType'
+    elementTypeHolderClass='net.kenro.ji.jin.crystal.psi.CrystalElementTypes'
+
+    elementTypeClass='net.kenro.ji.jin.crystal.psi.CrystalElementType'
     tokenTypeClass='net.kenro.ji.jin.crystal.psi.CrystalTokenType'
 
     psiClassPrefix='Crystal'
     psiImplClassSuffix='Impl'
     psiPackage='net.kenro.ji.jin.crystal.psi'
     psiImplPackage='net.kenro.ji.jin.crystal.psi.impl'
+
+    generateTokenAccessors=false
 
     tokens = [
         LEFT_BRACE =                         "{"
@@ -189,11 +193,13 @@
         TRAP =                               "trap"
         UNTRACE_VAR =                        "untrace_var"
         WARN =                               "warn"
+        LINE_COMMENT =                       "line_comment"
 
 
-        IDENT               = "regexp:\w+"
-        comment             = 'regexp:#.*'
-        space               = 'regexp:\s+'
+//        IDENT               = "regexp:\w+"
+//        comment             = 'regexp:#.*'
+//        space               = 'regexp:\s+'
+
 //        number              = 'regexp:(\+|\-)?(0b[01_]+|0o[0-7_]+|0x[a-fA-f\d_]+|[\d_]+)(\.[\d_]+)?(e[-+]?[\d_]+)?(_?(i|f|u)(8|16|32|64))?'
 //        string              = 'regexp:("([^\"\\]|\\.)*")'
 //        char                = "regexp:('([^'\\]|\\.)*')"
@@ -201,17 +207,17 @@
     ]
 }
 
-root ::= program *
+crystalFile ::= IF expression 'then' compositeStatement ['elsif' expression 'then' compositeStatement] ['else' compositeStatement] 'end'
 
-private program ::= (compositeStatement)
+//private item_ ::= (statements | expressions | primary | function)
 
-private compositeStatement ::= (statements | expressions)
+compositeStatement ::= (statements | expressions)
 
-private statements ::= statement [statements]
+statements ::= statement [statements]
 
 statement ::=
     call 'do' ['|' [blockVariable] '|'] compositeStatement 'end'
-   | 'if' expression
+//   | 'if' expression
    | 'undef' fname
    | 'alias' fname fname
    | 'while' expression
@@ -222,7 +228,7 @@ statement ::=
    | lhs '=' command ['do' ['|' [blockVariable] '|'] compositeStatement 'end']
    | expression
 
-private expressions ::= expression [expressions]
+expressions ::= expression [expressions]
 
 expression ::=
   mlhs '=' mrhs
@@ -243,16 +249,12 @@ command ::= operation callArgs
          | 'super' callArgs
 
 function ::= operation ['(' [callArgs] ')']
-         | primary '.' operation '(' [callArgs] ')'
-         | primary '::' operation '(' [callArgs] ')'
-         | primary '.' operation
-         | primary '::' operation
-         | 'super' '(' [callArgs] ')'
-         | 'super'
+         | primary ('.' | '::') operation ['(' [callArgs] ')']
+         | 'super' ['(' [callArgs] ')']
          | 'for' blockVariable 'in' expression 'do' compositeStatement 'end'
          | 'begin' compositeStatement {'rescue' [args] do compositeStatement} [('else' | 'ensure') compositeStatement] 'end'
-         | 'class' IDENT ['<' IDENT]  compositeStatement 'end'
-         | 'module' IDENT compositeStatement 'end'
+         | 'class' IDENT ['<' IDENT]  [compositeStatement] 'end'
+         | 'module' IDENT [compositeStatement] 'end'
          | 'def' fname argDecl compositeStatement 'end'
          | 'def' singleton ('.' | '::') fname argDecl compositeStatement 'end'
 

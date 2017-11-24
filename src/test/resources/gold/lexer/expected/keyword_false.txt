@@ -1,5 +1,5 @@
-identifier ('a')
-whitespace (' ')
+IDENT ('a')
+WHITE_SPACE (' ')
 = ('=')
-whitespace (' ')
+WHITE_SPACE (' ')
 false ('false')

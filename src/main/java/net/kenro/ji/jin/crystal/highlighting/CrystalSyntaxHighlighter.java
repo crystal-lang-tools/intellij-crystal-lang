@@ -5,10 +5,12 @@ import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import net.kenro.ji.jin.crystal.lexer.CrystalHighlightLexer;
-import net.kenro.ji.jin.crystal.psi.CrystalTokens;
+import net.kenro.ji.jin.crystal.psi.CrystalElementTypes;
+import net.kenro.ji.jin.crystal.psi.CrystalTokenSets;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -39,19 +41,16 @@ public class CrystalSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey CRYSTAL_COMMA = createKey("CRYSTAL_COMMA", DefaultLanguageHighlighterColors.COMMA);
 
     static {
-        fillMap(keys, TokenSet.create(CrystalTokens.SLCOMMENT), LINE_COMMENT);
-        fillMap(keys, CrystalTokens.keyWords, KEYWORD);
-        fillMap(keys, TokenSet.create(CrystalTokens.NUMBER), NUMBER);
-        fillMap(keys, TokenSet.create(CrystalTokens.STRING), STRING);
-        fillMap(keys, CrystalTokens.brackets, CRYSTAL_BRACKETS);
-        fillMap(keys, CrystalTokens.operators, OPERATOR);
-        fillMap(keys, TokenSet.create(CrystalTokens.IDENT), VARIABLE);
-        fillMap(keys, TokenSet.create(CrystalTokens.PROPER_NAME), METHOD_DECLARATION);
-        fillMap(keys, TokenSet.create(CrystalTokens.STRING_ESCAPED), KEYWORD);
-        fillMap(keys, TokenSet.create(CrystalTokens.STRING_ERROR), CodeInsightColors.ERRORS_ATTRIBUTES);
-        fillMap(keys, TokenSet.create(CrystalTokens.ERROR), CodeInsightColors.ERRORS_ATTRIBUTES);
-        keys.put(CrystalTokens.COMMA, CRYSTAL_COMMA);
-        keys.put(CrystalTokens.FLOAT, NUMBER);
+        fillMap(keys, TokenSet.create(CrystalElementTypes.LINE_COMMENT), LINE_COMMENT);
+        fillMap(keys, CrystalTokenSets.keyWords, KEYWORD);
+        fillMap(keys, TokenSet.create(CrystalElementTypes.NUMBER), NUMBER);
+        fillMap(keys, TokenSet.create(CrystalElementTypes.STRING), STRING);
+        fillMap(keys, CrystalTokenSets.brackets, CRYSTAL_BRACKETS);
+        fillMap(keys, CrystalTokenSets.operators, OPERATOR);
+        fillMap(keys, TokenSet.create(CrystalElementTypes.IDENT), VARIABLE);
+        fillMap(keys, TokenSet.create(TokenType.BAD_CHARACTER), CodeInsightColors.ERRORS_ATTRIBUTES);
+        keys.put(CrystalElementTypes.COMMA, CRYSTAL_COMMA);
+        keys.put(CrystalElementTypes.NUMBER, NUMBER);
     }
 
     @NotNull

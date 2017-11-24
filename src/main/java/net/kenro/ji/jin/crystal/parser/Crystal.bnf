@@ -196,9 +196,9 @@
         LINE_COMMENT =                       "line_comment"
 
 
-//        IDENT               = "regexp:\w+"
-//        comment             = 'regexp:#.*'
-//        space               = 'regexp:\s+'
+        IDENT               = "regexp:\w+"
+        comment             = 'regexp:#.*'
+        space               = 'regexp:\s+'
 
 //        number              = 'regexp:(\+|\-)?(0b[01_]+|0o[0-7_]+|0x[a-fA-f\d_]+|[\d_]+)(\.[\d_]+)?(e[-+]?[\d_]+)?(_?(i|f|u)(8|16|32|64))?'
 //        string              = 'regexp:("([^\"\\]|\\.)*")'
@@ -207,9 +207,9 @@
     ]
 }
 
-crystalFile ::= IF expression 'then' compositeStatement ['elsif' expression 'then' compositeStatement] ['else' compositeStatement] 'end'
+crystalFile ::= item_*
 
-//private item_ ::= (statements | expressions | primary | function)
+private item_ ::= (statements | expressions | primary | function)
 
 compositeStatement ::= (statements | expressions)
 

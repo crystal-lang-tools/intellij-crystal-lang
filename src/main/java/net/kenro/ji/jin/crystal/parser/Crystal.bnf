@@ -1,0 +1,355 @@
+{
+    parserClass='net.kenro.ji.jin.crystal.CrystalParser'
+
+    elementTypeHolderClass='net.kenro.ji.jin.crystal.psi.CrystalCompositeElementTypes'
+
+    elementTypeClass='net.kenro.ji.jin.crystal.psi.CrystalCompositeElementType'
+    tokenTypeClass='net.kenro.ji.jin.crystal.psi.CrystalTokenType'
+
+    psiClassPrefix='Crystal'
+    psiImplClassSuffix='Impl'
+    psiPackage='net.kenro.ji.jin.crystal.psi'
+    psiImplPackage='net.kenro.ji.jin.crystal.psi.impl'
+
+    tokens = [
+        LEFT_BRACE =                         "{"
+        RIGHT_BRACE =                        "}"
+        LEFT_PAREN =                         "("
+        RIGHT_PAREN =                        ")"
+        LEFT_BRACKET =                       "["
+        RIGHT_BRACKET =                      "]"
+        PIPE =                               "|"
+        DOT =                                "."
+        COMMA =                              ","
+        EQUAL =                              "="
+        EQUAL_EQUAL =                        "=="
+        EQUAL_EQUAL_EQUAL =                  "==="
+        BACKSLASH =                          "\\"
+        RIGHT_ARROW =                        "=>"
+        APROX_ARROW =                        "=~"
+        NOT_EQUAL =                          "!="
+        NOT_APROX =                          "!~"
+        NOT =                                "!"
+        LEFT_RIGHT_ARROW =                   "<=>"
+        LEFT_ARROW =                         "<="
+        LEFT_LEFT_ARROW =                    "<<="
+        INSERT =                             "<<"
+        LESS =                               "<"
+        GREATER_EQUAL =                      ">="
+        GREATER_GREATER_EQUAL =              ">>="
+        GREATER_GREATER =                    ">>"
+        GREATER =                            ">"
+        PLUS_EQUAL =                         "+="
+        PLUS =                               "+"
+        MINUS_EQUAL =                        "-="
+        MINUS_GREATER =                      "->"
+        MINUS =                              "-"
+        TIMES_EQUAL =                        "*="
+        TIMES_TIMES_EQUAL =                  "**="
+        TIMES_TIMES =                        "**"
+        TIMES =                              "*"
+        DIVIDENTE_EQUAL =                       "/="
+        DIVIDENTE =                             "/"
+        MODULO_EQUAL =                       "%="
+        MODULE =                             "module"
+        MACRO_BLOCK_CLOSE =                  "%}"
+        MACRO_BLOCK_OPEN =                   "{%"
+        MACRO_STATEMENT_OPEN =               "{{"
+        MACRO_STATEMENT_CLOSE =              "}}"
+        ARRAY_EQUAL =                        "[]="
+        ARRAY_BOOL =                         "[]?"
+        ARRAY =                              "[]"
+        QUESTION =                           "?"
+        SEMICOLON =                          ";"
+        NAMESPACE =                          "::"
+        COLON =                              ":"
+        TILDE =                              "~"
+        DOT_DOT_DOT =                        "..."
+        DOT_DOT =                            ".."
+        AND_AND_EQUAL =                      "&&="
+        AND_AND =                            "&&"
+        AND_EQUAL =                          "&="
+        AND =                                "&"
+        OR_OR_EQUAL =                        "||="
+        OR_OR =                              "||"
+        OR_EQUAL =                           "|="
+        CAROT_EQUAL =                        "^="
+        CAROT =                              "^"
+        AT_BRACKET =                         "@["
+        AT =                                 "@"
+        DOLLAR_TILDE =                       "$~"
+        DOLLAR_QUESTION =                    "$?"
+        CASE =                               "case"
+        CLASS =                              "class"
+        DEF =                                "def"
+        DO =                                 "do"
+        ELSE =                               "else"
+        END =                                "end"
+        IF =                                 "if"
+        NIL =                                "nil"
+        OF =                                 "of"
+        REQUIRE =                            "require"
+        WHEN =                               "when"
+        YIELD =                              "yield"
+        UNTIL =                              "until"
+        ELSIF =                              "elsif"
+        TRUE =                               "true"
+        FALSE =                              "false"
+        RAISE =                              "raise"
+
+        INCLUDE =                            "include"
+        EXTEND =                             "extend"
+        RETURN =                             "return"
+        BEGIN =                              "begin"
+        LIB =                                "lib"
+        FUN =                                "fun"
+        TYPE =                               "type"
+        STRUCT =                             "struct"
+        UNION =                              "union"
+        ENUM =                               "enum"
+        MACRO =                              "macro"
+        OUT =                                "out"
+        AS =                                 "as"
+        AS_QUESTION =                        "as?"
+        TYPEOF =                             "typeof"
+        FOR =                                "for"
+        SELECT =                             "select"
+        THEN =                               "then"
+        RESCUE =                             "rescue"
+        ENSURE =                             "ensure"
+        IS_A_QUESTION =                      "is_a?"
+        ALIAS =                              "alias"
+        SIZEOF =                             "sizeof"
+        NIL_QUESTION =                       "nil?"
+        IN =                                 "in"
+        WITH =                               "with"
+        SELF =                               "self"
+        SUPER =                              "super"
+        PRIVATE =                            "private"
+        ASM =                                "asm"
+        PROTECTED =                          "protected"
+        UNINITIALIZED =                      "uninitialized"
+        INSTANCE_SIZEOF =                    "instance_sizeof"
+        ABSTRACT =                           "abstract"
+        POINTEROF =                          "pointerof"
+
+        BREAK =                              "break"
+        INITIALIZE =                         "initialize"
+        NEW =                                "new"
+        LOOP =                               "loop"
+        PREPEND =                            "prepend"
+        FAIL =                               "fail"
+        GETTER =                             "getter"
+        SETTER =                             "setter"
+        PROPERTY =                           "property"
+        CATCH =                              "catch"
+        THROW =                              "throw"
+        ABORT =                              "abort"
+        AT_EXIT =                            "at_exit"
+        AUTOLOAD =                           "autoload"
+        BINDING =                            "binding"
+        CALLCC =                             "callcc"
+         CALLER =                            "caller"
+        CALLER_LOCATIONS =                   "caller_locations"
+        CHOMP =                              "chomp"
+        CHOP =                               "chop"
+        EVAL =                               "eval"
+        EXEC =                               "exec"
+        EXIT =                               "exit"
+        EXIT_BANG =                          "exit!"
+        FORK =                               "fork"
+        FORMAT =                             "format"
+        GETS =                               "gets"
+        GLOBAL_VARIABLES =                   "global_variables"
+        GSUB =                               "gsub"
+        ITERATOR =                           "iterator"
+        LAMBDA =                             "lambda"
+        LOAD =                               "load"
+        LOCAL_VARIABLES =                    "local_variables"
+        OPEN =                               "open"
+        P =                                  "p"
+        PRINT =                              "print"
+        PRINTF =                             "printf"
+        PROC =                               "proc"
+        PUTC =                               "putc"
+        PUTS =                               "puts"
+        RAND =                               "rand"
+        READLINE =                           "readline"
+        READLINES =                          "readlines"
+        SET_TRACE_FUNC =                     "set_trace_func"
+        SLEEP =                              "sleep"
+        SPAWN =                              "spawn"
+        SPRINTF =                            "sprintf"
+        SRAND =                              "srand"
+        SUB =                                "sub"
+        SYSCALL =                            "syscall"
+        SYSTEM =                             "system"
+        TEST =                               "test"
+        TRACE_VAR =                          "trace_var"
+        TRAP =                               "trap"
+        UNTRACE_VAR =                        "untrace_var"
+        WARN =                               "warn"
+
+
+        IDENT               = "regexp:\w+"
+        comment             = 'regexp:#.*'
+        space               = 'regexp:\s+'
+//        number              = 'regexp:(\+|\-)?(0b[01_]+|0o[0-7_]+|0x[a-fA-f\d_]+|[\d_]+)(\.[\d_]+)?(e[-+]?[\d_]+)?(_?(i|f|u)(8|16|32|64))?'
+//        string              = 'regexp:("([^\"\\]|\\.)*")'
+//        char                = "regexp:('([^'\\]|\\.)*')"
+//        symbol              = 'regexp:(:("([^\"\\]|\\.)*"|\S+))'
+    ]
+}
+
+root ::= program *
+
+private program ::= (compositeStatement)
+
+private compositeStatement ::= (statements | expressions)
+
+private statements ::= statement [statements]
+
+statement ::=
+    call 'do' ['|' [blockVariable] '|'] compositeStatement 'end'
+   | 'if' expression
+   | 'undef' fname
+   | 'alias' fname fname
+   | 'while' expression
+   | 'unless' expression
+   | 'until' expression
+   | 'begin' '{' compositeStatement '}'
+   | 'end' '{' compositeStatement '}'
+   | lhs '=' command ['do' ['|' [blockVariable] '|'] compositeStatement 'end']
+   | expression
+
+private expressions ::= expression [expressions]
+
+expression ::=
+  mlhs '=' mrhs
+| 'return' callArgs
+| 'yield' callArgs
+| 'and' expression
+| 'or' expression
+| 'not' expression
+| command
+| '!' command
+| arg
+
+call ::= function | command
+
+command ::= operation callArgs
+         | primary '.' operation callArgs
+         | primary '::' operation callArgs
+         | 'super' callArgs
+
+function ::= operation ['(' [callArgs] ')']
+         | primary '.' operation '(' [callArgs] ')'
+         | primary '::' operation '(' [callArgs] ')'
+         | primary '.' operation
+         | primary '::' operation
+         | 'super' '(' [callArgs] ')'
+         | 'super'
+         | 'for' blockVariable 'in' expression 'do' compositeStatement 'end'
+         | 'begin' compositeStatement {'rescue' [args] do compositeStatement} [('else' | 'ensure') compositeStatement] 'end'
+         | 'class' IDENT ['<' IDENT]  compositeStatement 'end'
+         | 'module' IDENT compositeStatement 'end'
+         | 'def' fname argDecl compositeStatement 'end'
+         | 'def' singleton ('.' | '::') fname argDecl compositeStatement 'end'
+
+whenArgs ::= args [',' '*' arg] | '*' arg
+
+blockVariable ::= lhs | mlhs
+
+mlhs ::= mlhsItem ',' [mlhsItem (',' mlhsItem)*] [ '*' lhs] | '*' lhs
+
+mlhsItem ::= lhs | '(' mlhs ')'
+
+lhs ::=
+   variable
+   | primary '[' [args] ']'
+   | primary '.' IDENT
+
+mrhs ::= args [',' '*' arg] | '*' arg
+
+callArgs ::= args
+       | args [',' assocs] [',' '*' args] [',' '&' arg]
+       | assocs [',' '*' args] [',' '&' arg]
+       | '*' arg [',' '&' arg] | '&' arg
+       | command
+
+args ::= arg (',' arg)*
+
+arg ::= lhs '=' arg
+//  | lhs opAsgn arg
+//  | arg '..' arg | arg '...' arg
+//  | arg '+' arg | arg '-' arg | arg '*' arg | arg '/' arg
+//  | arg '%' arg | arg '**' arg
+//  | '+' arg | '-' arg
+//  | arg '|' arg
+//  | arg '^' arg | arg '&' arg
+//  | arg '<=>' arg
+//  | arg '>' arg | arg '>=' arg | arg '<' arg | arg '<=' arg
+//  | arg '==' arg | arg '===' arg | arg '!=' arg
+//  | arg '='  '~' arg | arg '!' '~' arg
+//  | '!' arg | '~' arg
+//  | arg '<<' arg | arg '>>' arg
+//  | arg '&&' arg | arg '||' arg
+//  | 'defined?' arg
+  | primary
+
+primary ::= '(' compositeStatement ')'
+| literal
+| variable
+//| primary '::' IDENT
+//| '::' IDENT
+//| primary '[' [args] ']'
+//| '[' [args [',']] ']'
+//| '{' [args | assocs [',']] '}'
+//| 'return' ['(' [callArgs] ')']
+//| 'yield' ['(' [callArgs] ')']
+//| 'defined?' '(' arg ')'
+//| function
+//| function '{' ['|' [blockVariable] '|'] compositeStatement '}'
+| 'if' expression 'then' compositeStatement ['elsif' expression 'then' compositeStatement] ['else' compositeStatement] 'end'
+//| 'unless' expression 'then' compositeStatement ['else' compositeStatement] 'end'
+//| 'while' expression 'do' compositeStatement 'end'
+//| 'until' expression 'do' compositeStatement 'end'
+//| 'case' compositeStatement 'when' whenArgs 'then' compositeStatement {'when' whenArgs 'then' compositeStatement} ['else' compositeStatement] 'end'
+
+
+argDecl ::= '(' argList ')' | argList
+
+argList ::= IDENT (',' IDENT)* [',' '*' [IDENT]][',' '&' IDENT]
+| '*' IDENT [',' '&' IDENT]
+| [ '&' IDENT]
+
+
+singleton ::= variable | '(' expressions ')'
+
+assocs ::= assoc {',' assoc}
+
+assoc ::= arg '=>' arg
+
+variable ::= varName | 'nil' | 'self'
+
+literal ::= ( NIL
+                    | TRUE
+                    | FALSE
+                    | NUMBER
+//                    | char
+                    | STRING
+                    | symbol)
+
+opAsgn ::= '+='|'-='|'*='|'/='|'%='|'**=' |'&='|'|='|'ˆ='|'<<='|'>>=' |'&&='|'||='
+
+
+symbol ::= ':' (fname | varName)
+
+fname ::= IDENT | '..' | '|' | '^'|'&'| '<=>' | '==' | '===' | '=~'  | '>' | '>=' | '<' | '<=' | '+' | '-' | '*' | '/'
+             | '%'| '**' | '<<' | '>>' | '~' | '+@' | '-@' | '[]' | '[]='
+
+operation ::= IDENT ['!' | '?']
+
+varName ::= global | '@' IDENT | IDENT
+
+global ::= '$' IDENT

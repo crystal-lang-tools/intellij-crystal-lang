@@ -13,7 +13,7 @@ before_install:
 
 env:
   global:
-  - ORG_GRADLE_PROJECT_downloadIdeaSources=false
+  - ORG_GRADLE_PROJECT_downloadIdeaSources=true
   matrix:
   - ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
   - ORG_GRADLE_PROJECT_ideaVersion=2017.2

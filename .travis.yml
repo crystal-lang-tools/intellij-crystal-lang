@@ -9,7 +9,7 @@ cache:
   - "$HOME/.gradle/wrapper/"
 
 before_install:
-  - ./generate_parser.sh
+  - ./clean_all.sh
 
 env:
   global:

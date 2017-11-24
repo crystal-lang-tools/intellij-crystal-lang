@@ -70,7 +70,7 @@ coming soon
 
 1. clone the repo
 2. ./gradlew idea
-3. ./generate_parser.sh
+3. ./clean_all.sh (check the paths in the file first and amend accordingly)
 4. ./gradlew build
 5. open in intellij
 

@@ -25,6 +25,8 @@ Visit [intellij-crystal.github.io] to find documentation about installation and 
 
 ## Roadmap
 
+To track the progress [see the agile board here](https://tzatziki.io/b/zbcwdZLjAZa8wQdxX/intellij-crystal)
+
 The following features will evolve over the next few months:
 
 * full lexer - with tests
@@ -56,10 +58,7 @@ coming soon
 
 | IntelliJ                  |
 |---------------------------|
-| 2017.1.2                  |
-| 2017.1.1                  | 
-| 2017.1                    | 
-| Latest EAP                | 
+| 2017.2                    |
 
 
 ## Contributing
@@ -70,11 +69,12 @@ coming soon
 
 1. clone the repo
 2. ./gradlew idea
-3. ./clean_all.sh (check the paths in the file first and amend accordingly)
-4. ./gradlew build
-5. open in intellij
+3. ./gradlew build
+4. open in intellij
 
 ### Testing notes
+
+* to regenerate the parser and lexer run: ./regenerate.sh 
 
 for the parser:
 

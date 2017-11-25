@@ -193,8 +193,8 @@
         TRAP =                               "trap"
         UNTRACE_VAR =                        "untrace_var"
         WARN =                               "warn"
-        LINE_COMMENT =                       "line_comment"
 
+        LINE_COMMENT =                       'regexp:#.*'
         STRING_LITERAL =                     'regexp:("([^\"\\]|\\.)*")'
         NUMBER_LITERAL =                     'regexp:(\+|\-)?(0b[01_]+|0o[0-7_]+|0x[a-fA-f\d_]+|[\d_]+)(\.[\d_]+)?(e[-+]?[\d_]+)?(_?(i|f|u)(8|16|32|64))?'
         CHAR_LITERAL   =                     "regexp:('([^'\\]|\\.)*')"
@@ -206,7 +206,7 @@
 
 crystalFile ::= item_*
 
-private item_ ::= (statements | expressions | primary | function)
+private item_ ::= (statements | expressions)
 
 compositeStatement ::= (statements | expressions)
 
@@ -214,12 +214,14 @@ statements ::= statement [statements]
 
 statement ::=
     call 'do' ['|' [blockVariable] '|'] compositeStatement 'end'
+
 //   | 'if' expression
    | 'undef' fname
    | 'alias' fname fname
    | 'while' expression
    | 'unless' expression
    | 'until' expression
+   | 'require' STRING_LITERAL
    | 'begin' '{' compositeStatement '}'
    | 'end' '{' compositeStatement '}'
    | lhs '=' command ['do' ['|' [blockVariable] '|'] compositeStatement 'end']
@@ -252,7 +254,7 @@ function ::= operation ['(' [callArgs] ')']
          | 'begin' compositeStatement {'rescue' [args] do compositeStatement} [('else' | 'ensure') compositeStatement] 'end'
          | 'class' IDENT ['<' IDENT]  [compositeStatement] 'end'
          | 'module' IDENT [compositeStatement] 'end'
-         | 'def' fname argDecl compositeStatement 'end'
+         | 'def' fname argDecl [compositeStatement] 'end'
          | 'def' singleton ('.' | '::') fname argDecl compositeStatement 'end'
 
 whenArgs ::= args [',' '*' arg] | '*' arg

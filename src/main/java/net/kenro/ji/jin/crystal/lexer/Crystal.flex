@@ -22,15 +22,26 @@ import static net.kenro.ji.jin.crystal.psi.CrystalElementTypes.*;
 %type IElementType
 %unicode
 
-EOL=\R
+//EOL=\R
 WHITE_SPACE=\s+
 LINE_COMMENT=("#")[^\r\n]*
-identStart = [:lowercase:]|"_"
-identLetter = [:letter:]|[:digit:]|[_\']
-decimal = [0-9]+
-hexadecimal = [xX][0-9a-zA-Z]+
-octal = [oO][0-7]+
-stringChar = [^\"\\\0-\u001A]
+//identStart = [:lowercase:]|"_"
+//identLetter = [:letter:]|[:digit:]|[_\']
+//decimal = [0-9]+
+//hexadecimal = [xX][0-9a-zA-Z]+
+//octal = [oO][0-7]+
+//stringChar = [^\"\\\0-\u001A]
+
+IDENTIFIER_CHAR=[[:letter:][:digit:]_]
+HEX_CHAR=[[:digit:]A-Fa-f]
+LOWER_CASE_IDENTIFIER=[:lowercase:]{IDENTIFIER_CHAR}*
+CAPITALISED_IDENTIFIER=[:uppercase:]{IDENTIFIER_CHAR}*
+STRING_LITERAL=\"(\\.|[^\\\"])*\"
+STRING_WITH_DOUBLE_QUOTES_LITERAL=\"\"\"(\\.|[^\\\"]|\"{1,2}([^\"\\]|\\\"))*\"\"\"
+STRING_WITH_SINGLE_QUOTES_LITERAL=((\" ([^\"\n])* \"?) | ("'" ([^\'\n])* \'?))
+NUMBER_LITERAL=("-")?[:digit:]+(\.[:digit:]+)?
+HEXADECIMAL_LITERAL=0x{HEX_CHAR}+
+CHAR_LITERAL='(\\.|\\x{HEX_CHAR}+|[^\\'])'
 
 %%
 <YYINITIAL> {
@@ -214,10 +225,34 @@ stringChar = [^\"\\\0-\u001A]
   "warn"                  { return WARN; }
 
 
-  {identStart}{identLetter}*     { return IDENT; }
-  "0"({hexadecimal}|{octal}|{decimal})|{decimal} { return NUMBER; }
-  {stringChar}                   { return STRING; }
+//  {identStart}{identLetter}*     { return IDENT; }
+//  "0"({hexadecimal}|{octal}|{decimal})|{decimal} { return NUMBER; }
+//  {stringChar}                   { return STRING; }
 
+  {LOWER_CASE_IDENTIFIER} {
+        return IDENT;
+    }
+    {CAPITALISED_IDENTIFIER} {
+        return IDENT;
+    }
+    {STRING_WITH_DOUBLE_QUOTES_LITERAL} {
+        return STRING_LITERAL;
+    }
+     {STRING_WITH_SINGLE_QUOTES_LITERAL} {
+            return STRING_LITERAL;
+        }
+    {STRING_LITERAL} {
+        return STRING_LITERAL;
+    }
+    {CHAR_LITERAL} {
+        return CHAR_LITERAL;
+    }
+    {NUMBER_LITERAL} {
+        return NUMBER_LITERAL;
+    }
+    {HEXADECIMAL_LITERAL} {
+        return NUMBER_LITERAL;
+    }
 
 }
 

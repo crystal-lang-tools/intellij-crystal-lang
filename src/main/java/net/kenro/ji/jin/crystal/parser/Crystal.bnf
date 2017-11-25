@@ -195,15 +195,12 @@
         WARN =                               "warn"
         LINE_COMMENT =                       "line_comment"
 
+        STRING_LITERAL =                     'regexp:("([^\"\\]|\\.)*")'
+        NUMBER_LITERAL =                     'regexp:(\+|\-)?(0b[01_]+|0o[0-7_]+|0x[a-fA-f\d_]+|[\d_]+)(\.[\d_]+)?(e[-+]?[\d_]+)?(_?(i|f|u)(8|16|32|64))?'
+        CHAR_LITERAL   =                     "regexp:('([^'\\]|\\.)*')"
 
         IDENT               = "regexp:\w+"
-        comment             = 'regexp:#.*'
         space               = 'regexp:\s+'
-
-//        number              = 'regexp:(\+|\-)?(0b[01_]+|0o[0-7_]+|0x[a-fA-f\d_]+|[\d_]+)(\.[\d_]+)?(e[-+]?[\d_]+)?(_?(i|f|u)(8|16|32|64))?'
-//        string              = 'regexp:("([^\"\\]|\\.)*")'
-//        char                = "regexp:('([^'\\]|\\.)*')"
-//        symbol              = 'regexp:(:("([^\"\\]|\\.)*"|\S+))'
     ]
 }
 
@@ -337,9 +334,9 @@ variable ::= varName | 'nil' | 'self'
 literal ::= ( NIL
                     | TRUE
                     | FALSE
-                    | NUMBER
-//                    | char
-                    | STRING
+                    | NUMBER_LITERAL
+                    | CHAR_LITERAL
+                    | STRING_LITERAL
                     | symbol)
 
 opAsgn ::= '+='|'-='|'*='|'/='|'%='|'**=' |'&='|'|='|'ˆ='|'<<='|'>>=' |'&&='|'||='

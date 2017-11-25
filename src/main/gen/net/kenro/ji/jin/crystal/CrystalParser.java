@@ -1212,9 +1212,9 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   // NIL
   //                     | TRUE
   //                     | FALSE
-  //                     | NUMBER
-  // //                    | char
-  //                     | STRING
+  //                     | NUMBER_LITERAL
+  //                     | CHAR_LITERAL
+  //                     | STRING_LITERAL
   //                     | symbol
   public static boolean literal(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "literal")) return false;
@@ -1223,8 +1223,9 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     result_ = consumeToken(builder_, NIL);
     if (!result_) result_ = consumeToken(builder_, TRUE);
     if (!result_) result_ = consumeToken(builder_, FALSE);
-    if (!result_) result_ = consumeToken(builder_, NUMBER);
-    if (!result_) result_ = consumeToken(builder_, STRING);
+    if (!result_) result_ = consumeToken(builder_, NUMBER_LITERAL);
+    if (!result_) result_ = consumeToken(builder_, CHAR_LITERAL);
+    if (!result_) result_ = consumeToken(builder_, STRING_LITERAL);
     if (!result_) result_ = symbol(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;

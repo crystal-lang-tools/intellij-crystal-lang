@@ -23,6 +23,6 @@ public interface CrystalTokenSets {
             NAMESPACE, COLON, TILDE, DOT_DOT, DOT_DOT_DOT, AND, AND_AND, AND_AND_EQUAL, AND_EQUAL, OR_OR, OR_EQUAL, OR_OR_EQUAL, CAROT, CAROT_EQUAL,
             AT_BRACKET, AT, DOLLAR_TILDE, DOLLAR_QUESTION);
 
-    TokenSet strings = TokenSet.create(STRING);
+    TokenSet strings = TokenSet.create(STRING_LITERAL);
 
 }

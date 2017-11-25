@@ -1,5 +1,3 @@
 raise ('raise')
 WHITE_SPACE (' ')
-BAD_CHARACTER ('"')
-IDENT ('oops')
-BAD_CHARACTER ('"')
+STRING_LITERAL ('"oops"')

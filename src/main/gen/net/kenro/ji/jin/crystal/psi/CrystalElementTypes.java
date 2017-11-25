@@ -69,12 +69,12 @@ public interface CrystalElementTypes {
   IElementType CAROT_EQUAL = new CrystalTokenType("^=");
   IElementType CASE = new CrystalTokenType("case");
   IElementType CATCH = new CrystalTokenType("catch");
+  IElementType CHAR_LITERAL = new CrystalTokenType("CHAR_LITERAL");
   IElementType CHOMP = new CrystalTokenType("chomp");
   IElementType CHOP = new CrystalTokenType("chop");
   IElementType CLASS = new CrystalTokenType("class");
   IElementType COLON = new CrystalTokenType(":");
   IElementType COMMA = new CrystalTokenType(",");
-  IElementType COMMENT = new CrystalTokenType("comment");
   IElementType DEF = new CrystalTokenType("def");
   IElementType DIVIDENTE = new CrystalTokenType("/");
   IElementType DIVIDENTE_EQUAL = new CrystalTokenType("/=");
@@ -150,7 +150,7 @@ public interface CrystalElementTypes {
   IElementType NOT = new CrystalTokenType("!");
   IElementType NOT_APROX = new CrystalTokenType("!~");
   IElementType NOT_EQUAL = new CrystalTokenType("!=");
-  IElementType NUMBER = new CrystalTokenType("NUMBER");
+  IElementType NUMBER_LITERAL = new CrystalTokenType("NUMBER_LITERAL");
   IElementType OF = new CrystalTokenType("of");
   IElementType OPEN = new CrystalTokenType("open");
   IElementType OR_EQUAL = new CrystalTokenType("|=");
@@ -193,7 +193,7 @@ public interface CrystalElementTypes {
   IElementType SPAWN = new CrystalTokenType("spawn");
   IElementType SPRINTF = new CrystalTokenType("sprintf");
   IElementType SRAND = new CrystalTokenType("srand");
-  IElementType STRING = new CrystalTokenType("STRING");
+  IElementType STRING_LITERAL = new CrystalTokenType("STRING_LITERAL");
   IElementType STRUCT = new CrystalTokenType("struct");
   IElementType SUB = new CrystalTokenType("sub");
   IElementType SUPER = new CrystalTokenType("super");

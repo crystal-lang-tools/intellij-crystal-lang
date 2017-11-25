@@ -29,6 +29,6 @@ Crystal File
                       CrystalArgImpl(ARG)
                         CrystalPrimaryImpl(PRIMARY)
                           CrystalLiteralImpl(LITERAL)
-                            PsiElement(NUMBER)('1')
+                            PsiElement(NUMBER_LITERAL)('1')
             PsiWhiteSpace('\n')
             PsiElement(end)('end')

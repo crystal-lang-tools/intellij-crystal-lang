@@ -1,6 +1,5 @@
 class ('class')
 WHITE_SPACE (' ')
-STRING ('P')
-IDENT ('erson')
+IDENT ('Person')
 WHITE_SPACE ('\n')
 end ('end')

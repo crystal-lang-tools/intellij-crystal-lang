@@ -43,14 +43,13 @@ public class CrystalSyntaxHighlighter extends SyntaxHighlighterBase {
     static {
         fillMap(keys, TokenSet.create(CrystalElementTypes.LINE_COMMENT), LINE_COMMENT);
         fillMap(keys, CrystalTokenSets.keyWords, KEYWORD);
-        fillMap(keys, TokenSet.create(CrystalElementTypes.NUMBER), NUMBER);
-        fillMap(keys, TokenSet.create(CrystalElementTypes.STRING), STRING);
+        fillMap(keys, TokenSet.create(CrystalElementTypes.NUMBER_LITERAL), NUMBER);
+        fillMap(keys, TokenSet.create(CrystalElementTypes.STRING_LITERAL), STRING);
         fillMap(keys, CrystalTokenSets.brackets, CRYSTAL_BRACKETS);
         fillMap(keys, CrystalTokenSets.operators, OPERATOR);
         fillMap(keys, TokenSet.create(CrystalElementTypes.IDENT), VARIABLE);
         fillMap(keys, TokenSet.create(TokenType.BAD_CHARACTER), CodeInsightColors.ERRORS_ATTRIBUTES);
         keys.put(CrystalElementTypes.COMMA, CRYSTAL_COMMA);
-        keys.put(CrystalElementTypes.NUMBER, NUMBER);
     }
 
     @NotNull

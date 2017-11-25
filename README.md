@@ -56,9 +56,9 @@ coming soon
 
 ## Compatible Jetbrains Products
 
-| IntelliJ                  |
-|---------------------------|
-| 2017.2                    |
+| Release version | IntelliJ version |
+|-----------------|------------------|
+| 1.1-SNAPSHOT    | 2017.2           |
 
 
 ## Contributing

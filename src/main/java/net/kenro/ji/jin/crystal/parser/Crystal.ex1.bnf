@@ -1,0 +1,464 @@
+{
+    parserClass='net.kenro.ji.jin.crystal.CrystalParser'
+
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    elementTypeHolderClass='net.kenro.ji.jin.crystal.psi.CrystalElementTypes'
+
+    elementTypeClass='net.kenro.ji.jin.crystal.psi.CrystalElementType'
+    tokenTypeClass='net.kenro.ji.jin.crystal.psi.CrystalTokenType'
+
+    psiClassPrefix='Crystal'
+    psiImplClassSuffix='Impl'
+    psiPackage='net.kenro.ji.jin.crystal.psi'
+    psiImplPackage='net.kenro.ji.jin.crystal.psi.impl'
+
+    generateTokenAccessors=false
+
+    tokens = [
+        LEFT_BRACE =                         "{"
+        RIGHT_BRACE =                        "}"
+        LEFT_PAREN =                         "("
+        RIGHT_PAREN =                        ")"
+        LEFT_BRACKET =                       "["
+        RIGHT_BRACKET =                      "]"
+        PIPE =                               "|"
+        DOT =                                "."
+        COMMA =                              ","
+        EQUAL =                              "="
+        EQUAL_EQUAL =                        "=="
+        EQUAL_EQUAL_EQUAL =                  "==="
+        BACKSLASH =                          "\\"
+        RIGHT_ARROW =                        "=>"
+        APROX_ARROW =                        "=~"
+        NOT_EQUAL =                          "!="
+        NOT_APROX =                          "!~"
+        NOT =                                "!"
+        LEFT_RIGHT_ARROW =                   "<=>"
+        LEFT_ARROW =                         "<="
+        LEFT_LEFT_ARROW =                    "<<="
+        INSERT =                             "<<"
+        LESS =                               "<"
+        GREATER_EQUAL =                      ">="
+        GREATER_GREATER_EQUAL =              ">>="
+        GREATER_GREATER =                    ">>"
+        GREATER =                            ">"
+        PLUS_EQUAL =                         "+="
+        PLUS =                               "+"
+        MINUS_EQUAL =                        "-="
+        MINUS_GREATER =                      "->"
+        MINUS =                              "-"
+        TIMES_EQUAL =                        "*="
+        TIMES_TIMES_EQUAL =                  "**="
+        TIMES_TIMES =                        "**"
+        TIMES =                              "*"
+        DIVIDENTE_EQUAL =                       "/="
+        DIVIDENTE =                             "/"
+        MODULO_EQUAL =                       "%="
+        MODULE =                             "module"
+        MACRO_BLOCK_CLOSE =                  "%}"
+        MACRO_BLOCK_OPEN =                   "{%"
+        MACRO_STATEMENT_OPEN =               "{{"
+        MACRO_STATEMENT_CLOSE =              "}}"
+        ARRAY_EQUAL =                        "[]="
+        ARRAY_BOOL =                         "[]?"
+        ARRAY =                              "[]"
+        QUESTION =                           "?"
+        SEMICOLON =                          ";"
+        NAMESPACE =                          "::"
+        COLON =                              ":"
+        TILDE =                              "~"
+        DOT_DOT_DOT =                        "..."
+        DOT_DOT =                            ".."
+        AND_AND_EQUAL =                      "&&="
+        AND_AND =                            "&&"
+        AND_EQUAL =                          "&="
+        AND =                                "&"
+        OR_OR_EQUAL =                        "||="
+        OR_OR =                              "||"
+        OR_EQUAL =                           "|="
+        CAROT_EQUAL =                        "^="
+        CAROT =                              "^"
+        AT_BRACKET =                         "@["
+        AT =                                 "@"
+        DOLLAR_TILDE =                       "$~"
+        DOLLAR_QUESTION =                    "$?"
+        CASE =                               "case"
+        CLASS =                              "class"
+        DEF =                                "def"
+        DO =                                 "do"
+        ELSE =                               "else"
+        END =                                "end"
+        IF =                                 "if"
+        NIL =                                "nil"
+        OF =                                 "of"
+        REQUIRE =                            "require"
+        WHEN =                               "when"
+        YIELD =                              "yield"
+        UNTIL =                              "until"
+        ELSIF =                              "elsif"
+        TRUE =                               "true"
+        FALSE =                              "false"
+        RAISE =                              "raise"
+
+        INCLUDE =                            "include"
+        EXTEND =                             "extend"
+        RETURN =                             "return"
+        BEGIN =                              "begin"
+        LIB =                                "lib"
+        FUN =                                "fun"
+        TYPE =                               "type"
+        STRUCT =                             "struct"
+        UNION =                              "union"
+        ENUM =                               "enum"
+        MACRO =                              "macro"
+        OUT =                                "out"
+        AS =                                 "as"
+        AS_QUESTION =                        "as?"
+        TYPEOF =                             "typeof"
+        FOR =                                "for"
+        SELECT =                             "select"
+        THEN =                               "then"
+        RESCUE =                             "rescue"
+        ENSURE =                             "ensure"
+        IS_A_QUESTION =                      "is_a?"
+        ALIAS =                              "alias"
+        SIZEOF =                             "sizeof"
+        NIL_QUESTION =                       "nil?"
+        IN =                                 "in"
+        WITH =                               "with"
+        SELF =                               "self"
+        SUPER =                              "super"
+        PRIVATE =                            "private"
+        ASM =                                "asm"
+        PROTECTED =                          "protected"
+        UNINITIALIZED =                      "uninitialized"
+        INSTANCE_SIZEOF =                    "instance_sizeof"
+        ABSTRACT =                           "abstract"
+        POINTEROF =                          "pointerof"
+
+        BREAK =                              "break"
+        INITIALIZE =                         "initialize"
+        NEW =                                "new"
+        LOOP =                               "loop"
+        PREPEND =                            "prepend"
+        FAIL =                               "fail"
+        GETTER =                             "getter"
+        SETTER =                             "setter"
+        PROPERTY =                           "property"
+        CATCH =                              "catch"
+        THROW =                              "throw"
+        ABORT =                              "abort"
+        AT_EXIT =                            "at_exit"
+        AUTOLOAD =                           "autoload"
+        BINDING =                            "binding"
+        CALLCC =                             "callcc"
+         CALLER =                            "caller"
+        CALLER_LOCATIONS =                   "caller_locations"
+        CHOMP =                              "chomp"
+        CHOP =                               "chop"
+        EVAL =                               "eval"
+        EXEC =                               "exec"
+        EXIT =                               "exit"
+        EXIT_BANG =                          "exit!"
+        FORK =                               "fork"
+        FORMAT =                             "format"
+        GETS =                               "gets"
+        GLOBAL_VARIABLES =                   "global_variables"
+        GSUB =                               "gsub"
+        ITERATOR =                           "iterator"
+        LAMBDA =                             "lambda"
+        LOAD =                               "load"
+        LOCAL_VARIABLES =                    "local_variables"
+        OPEN =                               "open"
+        P =                                  "p"
+        PRINT =                              "print"
+        PRINTF =                             "printf"
+        PROC =                               "proc"
+        PUTC =                               "putc"
+        PUTS =                               "puts"
+        RAND =                               "rand"
+        READLINE =                           "readline"
+        READLINES =                          "readlines"
+        SET_TRACE_FUNC =                     "set_trace_func"
+        SLEEP =                              "sleep"
+        SPAWN =                              "spawn"
+        SPRINTF =                            "sprintf"
+        SRAND =                              "srand"
+        SUB =                                "sub"
+        SYSCALL =                            "syscall"
+        SYSTEM =                             "system"
+        TEST =                               "test"
+        TRACE_VAR =                          "trace_var"
+        TRAP =                               "trap"
+        UNTRACE_VAR =                        "untrace_var"
+        WARN =                               "warn"
+
+        LINE_COMMENT =                       'regexp:#.*'
+        STRING_LITERAL =                     'regexp:("([^\"\\]|\\.)*")'
+        NUMBER_LITERAL =                     'regexp:(\+|\-)?(0b[01_]+|0o[0-7_]+|0x[a-fA-f\d_]+|[\d_]+)(\.[\d_]+)?(e[-+]?[\d_]+)?(_?(i|f|u)(8|16|32|64))?'
+        CHAR_LITERAL   =                     "regexp:('([^'\\]|\\.)*')"
+
+        IDENT               = "regexp:\w+"
+        space               = 'regexp:\s+'
+    ]
+}
+
+PROGRAM         ::= COMPSTMT
+
+COMPSTMT        ::= STMT (TERM EXPR)* [TERM]
+
+STMT            ::= CALL do [`|' [BLOCK_VAR] `|'] COMPSTMT end
+                | LHS `=' COMMAND [do [`|' [BLOCK_VAR] `|'] COMPSTMT end]
+                | alias FNAME FNAME
+                | undef (FNAME | SYMBOL)+
+                | STMT if EXPR
+                | STMT while EXPR
+                | STMT unless EXPR
+                | STMT until EXPR
+                | STMT rescue STMT
+                | `BEGIN' `{' COMPSTMT `}'
+                | `END' `{' COMPSTMT `}'
+                | EXPR
+
+EXPR            ::= MLHS `=' MRHS
+                | return CALL_ARGS
+                | EXPR and EXPR
+                | EXPR or EXPR
+                | not EXPR
+                | COMMAND
+                | `!' COMMAND
+                | ARG
+
+CALL            : FUNCTION
+                | COMMAND
+
+COMMAND         : OPERATION CALL_ARGS
+                | PRIMARY `.' FNAME CALL_ARGS
+                | PRIMARY `::' FNAME CALL_ARGS
+                | super CALL_ARGS
+                | yield CALL_ARGS
+
+FUNCTION        : OPERATION [`(' [CALL_ARGS] `)']
+                | PRIMARY `.' FNAME `(' [CALL_ARGS] `)'
+                | PRIMARY `::' FNAME `(' [CALL_ARGS] `)'
+                | PRIMARY `.' FNAME
+                | PRIMARY `::' FNAME
+                | super [`(' [CALL_ARGS] `)']
+
+ARG             : LHS `=' ARG
+                | LHS OP_ASGN ARG
+                | ARG `..' ARG
+                | ARG `...' ARG
+                | ARG `+' ARG
+                | ARG `-' ARG
+                | ARG `*' ARG
+                | ARG `/' ARG
+                | ARG `%' ARG
+                | ARG `**' ARG
+                | `+' ARG
+                | `-' ARG
+                | ARG `|' ARG
+                | ARG `^' ARG
+                | ARG `&' ARG
+                | ARG `<=>' ARG
+                | ARG `>' ARG
+                | ARG `>=' ARG
+                | ARG `<' ARG
+                | ARG `<=' ARG
+                | ARG `==' ARG
+                | ARG `===' ARG
+                | ARG `!=' ARG
+                | ARG `=~' ARG
+                | ARG `!~' ARG
+                | `!' ARG
+                | `~' ARG
+                | ARG `<<' ARG
+                | ARG `>>' ARG
+                | ARG `&&' ARG
+                | ARG `||' ARG
+                | defined? ARG
+                | PRIMARY
+
+PRIMARY         : `(' COMPSTMT `)'
+                | LITERAL
+                | VARIABLE
+                | PRIMARY `::' identifier
+                | `::' identifier
+                | PRIMARY `[' [ARGS] `]'
+                | `[' [ARGS [`,']] `]'
+                | `{' [(ARGS|ASSOCS) [`,']] `}'
+                | return [`(' [CALL_ARGS] `)']
+                | yield [`(' [CALL_ARGS] `)']
+                | defined? `(' ARG `)'
+                | FUNCTION
+                | FUNCTION `{' [`|' [BLOCK_VAR] `|'] COMPSTMT `}'
+                | if EXPR THEN
+                  COMPSTMT
+                  (elsif EXPR THEN COMPSTMT)*
+                  [else COMPSTMT]
+                  end
+                | unless EXPR THEN
+                  COMPSTMT
+                  [else COMPSTMT]
+                  end
+                | while EXPR DO COMPSTMT end
+                | until EXPR DO COMPSTMT end
+                | case [EXPR]
+                  (when WHEN_ARGS THEN COMPSTMT)+
+                  [else COMPSTMT]
+                  end
+                | for BLOCK_VAR in EXPR DO
+                  COMPSTMT
+                  end
+                | begin
+                  COMPSTMT
+                  [rescue [ARGS] [`=>' LHS] THEN COMPSTMT]+
+                  [else COMPSTMT]
+                  [ensure COMPSTMT]
+                  end
+                | class identifier [`<' identifier]
+                  COMPSTMT
+                  end
+                | module identifier
+                  COMPSTMT
+                  end
+                | def FNAME ARGDECL
+                  COMPSTMT
+                  [rescue [ARGS] [`=>' LHS] THEN COMPSTMT]+
+                  [else COMPSTMT]
+                  [ensure COMPSTMT]
+                  end
+                | def SINGLETON (`.'|`::') FNAME ARGDECL
+                  COMPSTMT
+                  end
+
+WHEN_ARGS       : ARGS [`,' `*' ARG]
+                | `*' ARG
+
+THEN            : TERM
+                | then
+                | TERM then
+
+DO              : TERM
+                | do
+                | TERM do
+
+BLOCK_VAR       : LHS
+                | MLHS
+
+MLHS            : MLHS_ITEM `,' MLHS_ITEM [(`,' MLHS_ITEM)*] [`,' `*' [LHS]]
+                | MLHS_ITEM `,' `*' [LHS]
+                | MLHS_ITEM [(`,' MLHS_ITEM)*] `,'
+                | `*' [LHS]
+                | `(' MLHS `)'
+
+MLHS_ITEM       : LHS
+                | '(' MLHS ')'
+
+LHS             : VARNAME
+                | PRIMARY `[' [ARGS] `]'
+                | PRIMARY `.' identifier
+
+MRHS            : ARGS [`,' `*' ARG]
+                | `*' ARG
+
+CALL_ARGS       : ARGS
+                | ARGS [`,' ASSOCS] [`,' `*' ARG] [`,' `&' ARG]
+                | ASSOCS [`,' `*' ARG] [`,' `&' ARG]
+                | `*' ARG [`,' `&' ARG]
+                | `&' ARG
+                | COMMAND
+
+ARGS            : ARG (`,' ARG)*
+
+ARGDECL         : `(' ARGLIST `)'
+                | ARGLIST TERM
+
+ARGLIST         : identifier(`,'identifier)*[`,'`*'[identifier]][`,'`&'identifier]
+                | `*'identifier[`,'`&'identifier]
+                | [`&'identifier]
+
+SINGLETON       : VARNAME
+                | self
+                | nil
+                | true
+                | false
+                | `(' EXPR `)'
+
+ASSOCS          : ASSOC (`,' ASSOC)*
+
+ASSOC           : ARG `=>' ARG
+
+VARIABLE        : VARNAME
+                | self
+                | nil
+                | true
+                | false
+                | __FILE__
+                | __LINE__
+
+LITERAL         : numeric
+                | SYMBOL
+                | STRING
+                | HERE_DOC
+                | WORDS
+                | REGEXP
+
+STRING          : LITERAL_STRING+
+
+TERM            : `;'
+                | `\n'
+
+OP_ASGN         : `+=' | `-=' | `*=' | `/=' | `%=' | `**='
+                | `&=' | `|=' | `^=' | `<<=' | `>>='
+                | `&&=' | `||='
+
+SYMBOL          : `:'FNAME
+                | `:'`@'identifier
+                | `:'`@@'identifier
+                | `:'GLOBAL
+
+FNAME           : OPERATION
+                | `|' | `^' | `&' | `<=>' | `==' | `===' | `=~'
+                | `>' | `>=' | `<' | `<='
+                | `+' | `-' | `*' | `/' | `%' | `**'
+                | `<<' | `>>' | `~' | ``'
+                | `+@' | `-@' | `[]' | `[]='
+                | __LINE__ | __FILE__  | BEGIN | END
+                | alias | and | begin | break | case | class | def
+                | defined | do | else | elsif | end | ensure | false
+                | for | if | in | module | next | nil | not
+                | or | redo | rescue | retry | return | self | super
+                | then | true | undef | unless | until | when
+                | while | yield
+
+OPERATION       : identifier
+                | identifier'!'
+                | identifier'?'
+
+VARNAME         : GLOBAL
+                | `@'identifier
+                | `@@'identifier
+                | identifier
+
+GLOBAL          : `$'identifier
+                | `$'any_char
+                | `$''-'any_char
+
+LITERAL_STRING  : `"' any_char* `"'
+                | `'' any_char* `''
+                | ``' any_char* ``'
+                | `%'(`Q'|`q'|`x')char any_char* char
+
+HERE_DOC        : `<<'(identifier|STRING)
+                  any_char*
+                  identifier
+                | `<<-'(identifier|STRING)
+                  any_char*
+                  space* identifier
+
+WORDS           : `%'`w'char any_char* char
+
+REGEXP          : `/' any_char* `/'[`i'|`m'|`x'|`o'|`e'|`s'|`u'|`n']
+                | `%'`r' char any_char* char

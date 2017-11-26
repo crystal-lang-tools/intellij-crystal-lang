@@ -254,6 +254,7 @@ command ::= operation callArgs
          | primaries '.' operation callArgs
          | primaries '::' operation callArgs
          | 'super' callArgs
+         | 'loop'
 
 function ::= operation ['(' [callArgs] ')']
          | 'super' ['(' [callArgs] ')']
@@ -314,8 +315,9 @@ primary ::= '(' compositeStatement ')'
 | 'unless' expression 'then' compositeStatement ['else' compositeStatement] 'end'
 | 'while' expression 'do' compositeStatement 'end'
 | 'until' expression 'do' compositeStatement 'end'
-| 'case' compositeStatement 'when' whenArgs 'then' compositeStatement {'when' whenArgs 'then' compositeStatement} ['else' compositeStatement] 'end'
-
+| ('case'| 'select') [compositeStatement] 'when' whenArgs 'then' compositeStatement ['when' whenArgs 'then' compositeStatement] ['else' compositeStatement] 'end'
+| 'puts' args
+| 'break'
 
 argDecl ::= '(' argList ')' | argList
 

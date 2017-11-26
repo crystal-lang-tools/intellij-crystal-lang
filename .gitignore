@@ -33,9 +33,6 @@ proguard/
 .gradle/
 build/
 bin/
-gradle-wrapper.jar
-gradle-wrapper.properties
-gradlew.bat
 
 out
 

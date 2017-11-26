@@ -76,12 +76,6 @@ public class CrystalFunctionImpl extends ASTWrapperPsiElement implements Crystal
 
   @Override
   @Nullable
-  public CrystalPrimary getPrimary() {
-    return findChildByClass(CrystalPrimary.class);
-  }
-
-  @Override
-  @Nullable
   public CrystalSingleton getSingleton() {
     return findChildByClass(CrystalSingleton.class);
   }

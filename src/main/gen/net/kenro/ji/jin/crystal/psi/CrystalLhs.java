@@ -11,7 +11,7 @@ public interface CrystalLhs extends PsiElement {
   CrystalArgs getArgs();
 
   @Nullable
-  CrystalPrimary getPrimary();
+  CrystalPrimaries getPrimaries();
 
   @Nullable
   CrystalVariable getVariable();

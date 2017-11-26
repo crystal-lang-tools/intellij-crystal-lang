@@ -28,6 +28,36 @@ public class CrystalPrimaryImpl extends ASTWrapperPsiElement implements CrystalP
 
   @Override
   @Nullable
+  public CrystalArg getArg() {
+    return findChildByClass(CrystalArg.class);
+  }
+
+  @Override
+  @Nullable
+  public CrystalArgs getArgs() {
+    return findChildByClass(CrystalArgs.class);
+  }
+
+  @Override
+  @Nullable
+  public CrystalAssocs getAssocs() {
+    return findChildByClass(CrystalAssocs.class);
+  }
+
+  @Override
+  @Nullable
+  public CrystalBlockVariable getBlockVariable() {
+    return findChildByClass(CrystalBlockVariable.class);
+  }
+
+  @Override
+  @Nullable
+  public CrystalCallArgs getCallArgs() {
+    return findChildByClass(CrystalCallArgs.class);
+  }
+
+  @Override
+  @Nullable
   public CrystalCompositeStatement getCompositeStatement() {
     return findChildByClass(CrystalCompositeStatement.class);
   }
@@ -40,14 +70,32 @@ public class CrystalPrimaryImpl extends ASTWrapperPsiElement implements CrystalP
 
   @Override
   @Nullable
+  public CrystalFunction getFunction() {
+    return findChildByClass(CrystalFunction.class);
+  }
+
+  @Override
+  @Nullable
   public CrystalLiteral getLiteral() {
     return findChildByClass(CrystalLiteral.class);
   }
 
   @Override
   @Nullable
+  public CrystalOperation getOperation() {
+    return findChildByClass(CrystalOperation.class);
+  }
+
+  @Override
+  @Nullable
   public CrystalVariable getVariable() {
     return findChildByClass(CrystalVariable.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalWhenArgs> getWhenArgsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalWhenArgs.class);
   }
 
 }

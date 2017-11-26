@@ -22,15 +22,8 @@ import static net.kenro.ji.jin.crystal.psi.CrystalElementTypes.*;
 %type IElementType
 %unicode
 
-//EOL=\R
 WHITE_SPACE=\s+
 LINE_COMMENT=("#")[^\r\n]*
-//identStart = [:lowercase:]|"_"
-//identLetter = [:letter:]|[:digit:]|[_\']
-//decimal = [0-9]+
-//hexadecimal = [xX][0-9a-zA-Z]+
-//octal = [oO][0-7]+
-//stringChar = [^\"\\\0-\u001A]
 
 IDENTIFIER_CHAR=[[:letter:][:digit:]_]
 HEX_CHAR=[[:digit:]A-Fa-f]
@@ -224,14 +217,7 @@ CHAR_LITERAL='(\\.|\\x{HEX_CHAR}+|[^\\'])'
   "untrace_var"           { return UNTRACE_VAR; }
   "warn"                  { return WARN; }
 
-
-//  {identStart}{identLetter}*     { return IDENT; }
-//  "0"({hexadecimal}|{octal}|{decimal})|{decimal} { return NUMBER; }
-//  {stringChar}                   { return STRING; }
-
-  {LOWER_CASE_IDENTIFIER} {
-        return IDENT;
-    }
+  {LOWER_CASE_IDENTIFIER} { return IDENT; }
     {CAPITALISED_IDENTIFIER} {
         return IDENT;
     }

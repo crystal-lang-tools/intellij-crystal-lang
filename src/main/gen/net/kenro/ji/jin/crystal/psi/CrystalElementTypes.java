@@ -31,6 +31,7 @@ public interface CrystalElementTypes {
   IElementType MRHS = new CrystalElementType("MRHS");
   IElementType OPERATION = new CrystalElementType("OPERATION");
   IElementType OP_ASGN = new CrystalElementType("OP_ASGN");
+  IElementType PRIMARIES = new CrystalElementType("PRIMARIES");
   IElementType PRIMARY = new CrystalElementType("PRIMARY");
   IElementType SINGLETON = new CrystalElementType("SINGLETON");
   IElementType STATEMENT = new CrystalElementType("STATEMENT");
@@ -129,7 +130,7 @@ public interface CrystalElementTypes {
   IElementType LEFT_RIGHT_ARROW = new CrystalTokenType("<=>");
   IElementType LESS = new CrystalTokenType("<");
   IElementType LIB = new CrystalTokenType("lib");
-  IElementType LINE_COMMENT = new CrystalTokenType("line_comment");
+  IElementType LINE_COMMENT = new CrystalTokenType("LINE_COMMENT");
   IElementType LOAD = new CrystalTokenType("load");
   IElementType LOCAL_VARIABLES = new CrystalTokenType("local_variables");
   IElementType LOOP = new CrystalTokenType("loop");
@@ -292,6 +293,9 @@ public interface CrystalElementTypes {
       }
       else if (type == OP_ASGN) {
         return new CrystalOpAsgnImpl(node);
+      }
+      else if (type == PRIMARIES) {
+        return new CrystalPrimariesImpl(node);
       }
       else if (type == PRIMARY) {
         return new CrystalPrimaryImpl(node);

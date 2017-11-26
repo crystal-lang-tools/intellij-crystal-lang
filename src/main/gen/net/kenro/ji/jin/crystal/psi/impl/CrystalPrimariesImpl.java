@@ -11,14 +11,14 @@ import static net.kenro.ji.jin.crystal.psi.CrystalElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import net.kenro.ji.jin.crystal.psi.*;
 
-public class CrystalLhsImpl extends ASTWrapperPsiElement implements CrystalLhs {
+public class CrystalPrimariesImpl extends ASTWrapperPsiElement implements CrystalPrimaries {
 
-  public CrystalLhsImpl(ASTNode node) {
+  public CrystalPrimariesImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull CrystalVisitor visitor) {
-    visitor.visitLhs(this);
+    visitor.visitPrimaries(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -28,20 +28,14 @@ public class CrystalLhsImpl extends ASTWrapperPsiElement implements CrystalLhs {
 
   @Override
   @Nullable
-  public CrystalArgs getArgs() {
-    return findChildByClass(CrystalArgs.class);
-  }
-
-  @Override
-  @Nullable
   public CrystalPrimaries getPrimaries() {
     return findChildByClass(CrystalPrimaries.class);
   }
 
   @Override
-  @Nullable
-  public CrystalVariable getVariable() {
-    return findChildByClass(CrystalVariable.class);
+  @NotNull
+  public CrystalPrimary getPrimary() {
+    return findNotNullChildByClass(CrystalPrimary.class);
   }
 
 }

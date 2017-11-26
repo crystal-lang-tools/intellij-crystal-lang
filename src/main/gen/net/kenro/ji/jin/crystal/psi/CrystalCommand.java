@@ -14,6 +14,6 @@ public interface CrystalCommand extends PsiElement {
   CrystalOperation getOperation();
 
   @Nullable
-  CrystalPrimary getPrimary();
+  CrystalPrimaries getPrimaries();
 
 }

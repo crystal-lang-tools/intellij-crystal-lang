@@ -223,8 +223,7 @@ statements ::= statement [statements]
 
 statement ::=
     call 'do' ['|' [blockVariable] '|'] compositeStatement 'end'
-
-//   | 'if' expression
+   | 'if' expression
    | 'undef' fname
    | 'alias' fname fname
    | 'while' expression
@@ -252,12 +251,11 @@ expression ::=
 call ::= function | command
 
 command ::= operation callArgs
-         | primary '.' operation callArgs
-         | primary '::' operation callArgs
+         | primaries '.' operation callArgs
+         | primaries '::' operation callArgs
          | 'super' callArgs
 
 function ::= operation ['(' [callArgs] ')']
-         | primary ('.' | '::') operation ['(' [callArgs] ')']
          | 'super' ['(' [callArgs] ')']
          | 'for' blockVariable 'in' expression 'do' compositeStatement 'end'
          | 'begin' compositeStatement {'rescue' [args] do compositeStatement} [('else' | 'ensure') compositeStatement] 'end'
@@ -276,8 +274,8 @@ mlhsItem ::= lhs | '(' mlhs ')'
 
 lhs ::=
    variable
-   | primary '[' [args] ']'
-   | primary '.' IDENT
+   | primaries '[' [args] ']'
+   | primaries '.' IDENT
 
 mrhs ::= args [',' '*' arg] | '*' arg
 
@@ -287,44 +285,36 @@ callArgs ::= args
        | '*' arg [',' '&' arg] | '&' arg
        | command
 
-args ::= arg (',' arg)*
+args ::= arg (',' arg)* [args]
 
 arg ::= lhs '=' arg
-//  | lhs opAsgn arg
-//  | arg '..' arg | arg '...' arg
-//  | arg '+' arg | arg '-' arg | arg '*' arg | arg '/' arg
-//  | arg '%' arg | arg '**' arg
-//  | '+' arg | '-' arg
-//  | arg '|' arg
-//  | arg '^' arg | arg '&' arg
-//  | arg '<=>' arg
-//  | arg '>' arg | arg '>=' arg | arg '<' arg | arg '<=' arg
-//  | arg '==' arg | arg '===' arg | arg '!=' arg
-//  | arg '='  '~' arg | arg '!' '~' arg
-//  | '!' arg | '~' arg
-//  | arg '<<' arg | arg '>>' arg
-//  | arg '&&' arg | arg '||' arg
-//  | 'defined?' arg
-  | primary
+  | lhs opAsgn arg
+  | ('..' | '...' | '+'  | '-'  | '*'  | '/'  | '%'  | '**'  | '|'  | '^'
+    | '&' | '<=>' | '>'  | '>=' | '<'  | '<=' | '==' | '===' | '!=' | '='
+    | '!' | '~'   | '<<' |  '>>'| '&&' | '||') arg
+  | 'defined?' arg
+  | primaries
+
+primaries ::= primary [primaries]
 
 primary ::= '(' compositeStatement ')'
 | literal
 | variable
-//| primary '::' IDENT
-//| '::' IDENT
-//| primary '[' [args] ']'
-//| '[' [args [',']] ']'
-//| '{' [args | assocs [',']] '}'
-//| 'return' ['(' [callArgs] ')']
-//| 'yield' ['(' [callArgs] ')']
-//| 'defined?' '(' arg ')'
-//| function
-//| function '{' ['|' [blockVariable] '|'] compositeStatement '}'
+| '::' IDENT
+| '[' [args] ']'
+| '[' [args [',']] ']'
+| '{' [args | assocs [',']] '}'
+| 'return' ['(' [callArgs] ')']
+| 'yield' ['(' [callArgs] ')']
+| 'defined?' '(' arg ')'
+| ('.' | '::') operation ['(' [callArgs] ')']
+| function
+| function '{' ['|' [blockVariable] '|'] compositeStatement '}'
 | 'if' expression 'then' compositeStatement ['elsif' expression 'then' compositeStatement] ['else' compositeStatement] 'end'
-//| 'unless' expression 'then' compositeStatement ['else' compositeStatement] 'end'
-//| 'while' expression 'do' compositeStatement 'end'
-//| 'until' expression 'do' compositeStatement 'end'
-//| 'case' compositeStatement 'when' whenArgs 'then' compositeStatement {'when' whenArgs 'then' compositeStatement} ['else' compositeStatement] 'end'
+| 'unless' expression 'then' compositeStatement ['else' compositeStatement] 'end'
+| 'while' expression 'do' compositeStatement 'end'
+| 'until' expression 'do' compositeStatement 'end'
+| 'case' compositeStatement 'when' whenArgs 'then' compositeStatement {'when' whenArgs 'then' compositeStatement} ['else' compositeStatement] 'end'
 
 
 argDecl ::= '(' argList ')' | argList
@@ -355,7 +345,7 @@ opAsgn ::= '+='|'-='|'*='|'/='|'%='|'**=' |'&='|'|='|'ˆ='|'<<='|'>>=' |'&&='|'|
 
 symbol ::= ':' (fname | varName)
 
-fname ::= IDENT | '..' | '|' | '^'|'&'| '<=>' | '==' | '===' | '=~'  | '>' | '>=' | '<' | '<=' | '+' | '-' | '*' | '/'
+fname ::=  IDENT | '..' | '|' | '^'|'&'| '<=>' | '==' | '===' | '=~'  | '>' | '>=' | '<' | '<=' | '+' | '-' | '*' | '/'
              | '%'| '**' | '<<' | '>>' | '~' | '+@' | '-@' | '[]' | '[]='
 
 operation ::= IDENT ['!' | '?']

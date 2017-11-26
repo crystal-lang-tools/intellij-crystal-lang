@@ -40,8 +40,8 @@ public class CrystalCommandImpl extends ASTWrapperPsiElement implements CrystalC
 
   @Override
   @Nullable
-  public CrystalPrimary getPrimary() {
-    return findChildByClass(CrystalPrimary.class);
+  public CrystalPrimaries getPrimaries() {
+    return findChildByClass(CrystalPrimaries.class);
   }
 
 }

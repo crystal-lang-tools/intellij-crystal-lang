@@ -32,4 +32,10 @@ public class CrystalArgsImpl extends ASTWrapperPsiElement implements CrystalArgs
     return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalArg.class);
   }
 
+  @Override
+  @Nullable
+  public CrystalArgs getArgs() {
+    return findChildByClass(CrystalArgs.class);
+  }
+
 }

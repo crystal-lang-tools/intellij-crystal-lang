@@ -92,6 +92,9 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     else if (root_ == OPERATION) {
       result_ = operation(builder_, 0);
     }
+    else if (root_ == PRIMARIES) {
+      result_ = primaries(builder_, 0);
+    }
     else if (root_ == PRIMARY) {
       result_ = primary(builder_, 0);
     }
@@ -128,28 +131,21 @@ public class CrystalParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // lhs '=' arg
-  // //  | lhs opAsgn arg
-  // //  | arg '..' arg | arg '...' arg
-  // //  | arg '+' arg | arg '-' arg | arg '*' arg | arg '/' arg
-  // //  | arg '%' arg | arg '**' arg
-  // //  | '+' arg | '-' arg
-  // //  | arg '|' arg
-  // //  | arg '^' arg | arg '&' arg
-  // //  | arg '<=>' arg
-  // //  | arg '>' arg | arg '>=' arg | arg '<' arg | arg '<=' arg
-  // //  | arg '==' arg | arg '===' arg | arg '!=' arg
-  // //  | arg '='  '~' arg | arg '!' '~' arg
-  // //  | '!' arg | '~' arg
-  // //  | arg '<<' arg | arg '>>' arg
-  // //  | arg '&&' arg | arg '||' arg
-  // //  | 'defined?' arg
-  //   | primary
+  //   | lhs opAsgn arg
+  //   | ('..' | '...' | '+'  | '-'  | '*'  | '/'  | '%'  | '**'  | '|'  | '^'
+  //     | '&' | '<=>' | '>'  | '>=' | '<'  | '<=' | '==' | '===' | '!=' | '='
+  //     | '!' | '~'   | '<<' |  '>>'| '&&' | '||') arg
+  //   | 'defined?' arg
+  //   | primaries
   public static boolean arg(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "arg")) return false;
     boolean result_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, ARG, "<arg>");
+    Marker marker_ = enter_section_(builder_, level_, _COLLAPSE_, ARG, "<arg>");
     result_ = arg_0(builder_, level_ + 1);
-    if (!result_) result_ = primary(builder_, level_ + 1);
+    if (!result_) result_ = arg_1(builder_, level_ + 1);
+    if (!result_) result_ = arg_2(builder_, level_ + 1);
+    if (!result_) result_ = arg_3(builder_, level_ + 1);
+    if (!result_) result_ = primaries(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
   }
@@ -161,6 +157,79 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     Marker marker_ = enter_section_(builder_);
     result_ = lhs(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, EQUAL);
+    result_ = result_ && arg(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // lhs opAsgn arg
+  private static boolean arg_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "arg_1")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = lhs(builder_, level_ + 1);
+    result_ = result_ && opAsgn(builder_, level_ + 1);
+    result_ = result_ && arg(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // ('..' | '...' | '+'  | '-'  | '*'  | '/'  | '%'  | '**'  | '|'  | '^'
+  //     | '&' | '<=>' | '>'  | '>=' | '<'  | '<=' | '==' | '===' | '!=' | '='
+  //     | '!' | '~'   | '<<' |  '>>'| '&&' | '||') arg
+  private static boolean arg_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "arg_2")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = arg_2_0(builder_, level_ + 1);
+    result_ = result_ && arg(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // '..' | '...' | '+'  | '-'  | '*'  | '/'  | '%'  | '**'  | '|'  | '^'
+  //     | '&' | '<=>' | '>'  | '>=' | '<'  | '<=' | '==' | '===' | '!=' | '='
+  //     | '!' | '~'   | '<<' |  '>>'| '&&' | '||'
+  private static boolean arg_2_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "arg_2_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, DOT_DOT);
+    if (!result_) result_ = consumeToken(builder_, DOT_DOT_DOT);
+    if (!result_) result_ = consumeToken(builder_, PLUS);
+    if (!result_) result_ = consumeToken(builder_, MINUS);
+    if (!result_) result_ = consumeToken(builder_, TIMES);
+    if (!result_) result_ = consumeToken(builder_, DIVIDENTE);
+    if (!result_) result_ = consumeToken(builder_, "%");
+    if (!result_) result_ = consumeToken(builder_, TIMES_TIMES);
+    if (!result_) result_ = consumeToken(builder_, PIPE);
+    if (!result_) result_ = consumeToken(builder_, CAROT);
+    if (!result_) result_ = consumeToken(builder_, AND);
+    if (!result_) result_ = consumeToken(builder_, LEFT_RIGHT_ARROW);
+    if (!result_) result_ = consumeToken(builder_, GREATER);
+    if (!result_) result_ = consumeToken(builder_, GREATER_EQUAL);
+    if (!result_) result_ = consumeToken(builder_, LESS);
+    if (!result_) result_ = consumeToken(builder_, LEFT_ARROW);
+    if (!result_) result_ = consumeToken(builder_, EQUAL_EQUAL);
+    if (!result_) result_ = consumeToken(builder_, EQUAL_EQUAL_EQUAL);
+    if (!result_) result_ = consumeToken(builder_, NOT_EQUAL);
+    if (!result_) result_ = consumeToken(builder_, EQUAL);
+    if (!result_) result_ = consumeToken(builder_, NOT);
+    if (!result_) result_ = consumeToken(builder_, TILDE);
+    if (!result_) result_ = consumeToken(builder_, INSERT);
+    if (!result_) result_ = consumeToken(builder_, GREATER_GREATER);
+    if (!result_) result_ = consumeToken(builder_, AND_AND);
+    if (!result_) result_ = consumeToken(builder_, OR_OR);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // 'defined?' arg
+  private static boolean arg_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "arg_3")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, "defined?");
     result_ = result_ && arg(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
@@ -298,13 +367,14 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // arg (',' arg)*
+  // arg (',' arg)* [args]
   public static boolean args(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "args")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, ARGS, "<args>");
     result_ = arg(builder_, level_ + 1);
     result_ = result_ && args_1(builder_, level_ + 1);
+    result_ = result_ && args_2(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
   }
@@ -330,6 +400,13 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     result_ = result_ && arg(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
+  }
+
+  // [args]
+  private static boolean args_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "args_2")) return false;
+    args(builder_, level_ + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -570,8 +647,8 @@ public class CrystalParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // operation callArgs
-  //          | primary '.' operation callArgs
-  //          | primary '::' operation callArgs
+  //          | primaries '.' operation callArgs
+  //          | primaries '::' operation callArgs
   //          | 'super' callArgs
   public static boolean command(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "command")) return false;
@@ -596,12 +673,12 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     return result_;
   }
 
-  // primary '.' operation callArgs
+  // primaries '.' operation callArgs
   private static boolean command_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "command_1")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
-    result_ = primary(builder_, level_ + 1);
+    result_ = primaries(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, DOT);
     result_ = result_ && operation(builder_, level_ + 1);
     result_ = result_ && callArgs(builder_, level_ + 1);
@@ -609,12 +686,12 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     return result_;
   }
 
-  // primary '::' operation callArgs
+  // primaries '::' operation callArgs
   private static boolean command_2(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "command_2")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
-    result_ = primary(builder_, level_ + 1);
+    result_ = primaries(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, NAMESPACE);
     result_ = result_ && operation(builder_, level_ + 1);
     result_ = result_ && callArgs(builder_, level_ + 1);
@@ -821,13 +898,12 @@ public class CrystalParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // operation ['(' [callArgs] ')']
-  //          | primary ('.' | '::') operation ['(' [callArgs] ')']
   //          | 'super' ['(' [callArgs] ')']
   //          | 'for' blockVariable 'in' expression 'do' compositeStatement 'end'
   //          | 'begin' compositeStatement {'rescue' [args] do compositeStatement} [('else' | 'ensure') compositeStatement] 'end'
   //          | 'class' IDENT ['<' IDENT]  [compositeStatement] 'end'
   //          | 'module' IDENT [compositeStatement] 'end'
-  //          | 'def' fname argDecl compositeStatement 'end'
+  //          | 'def' fname argDecl [compositeStatement] 'end'
   //          | 'def' singleton ('.' | '::') fname argDecl compositeStatement 'end'
   public static boolean function(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "function")) return false;
@@ -841,7 +917,6 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = function_5(builder_, level_ + 1);
     if (!result_) result_ = function_6(builder_, level_ + 1);
     if (!result_) result_ = function_7(builder_, level_ + 1);
-    if (!result_) result_ = function_8(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
   }
@@ -883,96 +958,46 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // primary ('.' | '::') operation ['(' [callArgs] ')']
+  // 'super' ['(' [callArgs] ')']
   private static boolean function_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "function_1")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
-    result_ = primary(builder_, level_ + 1);
+    result_ = consumeToken(builder_, SUPER);
     result_ = result_ && function_1_1(builder_, level_ + 1);
-    result_ = result_ && operation(builder_, level_ + 1);
-    result_ = result_ && function_1_3(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
-  // '.' | '::'
+  // ['(' [callArgs] ')']
   private static boolean function_1_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "function_1_1")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = consumeToken(builder_, DOT);
-    if (!result_) result_ = consumeToken(builder_, NAMESPACE);
-    exit_section_(builder_, marker_, null, result_);
-    return result_;
-  }
-
-  // ['(' [callArgs] ')']
-  private static boolean function_1_3(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_1_3")) return false;
-    function_1_3_0(builder_, level_ + 1);
+    function_1_1_0(builder_, level_ + 1);
     return true;
   }
 
   // '(' [callArgs] ')'
-  private static boolean function_1_3_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_1_3_0")) return false;
+  private static boolean function_1_1_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_1_1_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, LEFT_PAREN);
-    result_ = result_ && function_1_3_0_1(builder_, level_ + 1);
+    result_ = result_ && function_1_1_0_1(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, RIGHT_PAREN);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
   // [callArgs]
-  private static boolean function_1_3_0_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_1_3_0_1")) return false;
-    callArgs(builder_, level_ + 1);
-    return true;
-  }
-
-  // 'super' ['(' [callArgs] ')']
-  private static boolean function_2(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_2")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = consumeToken(builder_, SUPER);
-    result_ = result_ && function_2_1(builder_, level_ + 1);
-    exit_section_(builder_, marker_, null, result_);
-    return result_;
-  }
-
-  // ['(' [callArgs] ')']
-  private static boolean function_2_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_2_1")) return false;
-    function_2_1_0(builder_, level_ + 1);
-    return true;
-  }
-
-  // '(' [callArgs] ')'
-  private static boolean function_2_1_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_2_1_0")) return false;
-    boolean result_;
-    Marker marker_ = enter_section_(builder_);
-    result_ = consumeToken(builder_, LEFT_PAREN);
-    result_ = result_ && function_2_1_0_1(builder_, level_ + 1);
-    result_ = result_ && consumeToken(builder_, RIGHT_PAREN);
-    exit_section_(builder_, marker_, null, result_);
-    return result_;
-  }
-
-  // [callArgs]
-  private static boolean function_2_1_0_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_2_1_0_1")) return false;
+  private static boolean function_1_1_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_1_1_0_1")) return false;
     callArgs(builder_, level_ + 1);
     return true;
   }
 
   // 'for' blockVariable 'in' expression 'do' compositeStatement 'end'
-  private static boolean function_3(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_3")) return false;
+  private static boolean function_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_2")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, FOR);
@@ -987,26 +1012,26 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // 'begin' compositeStatement {'rescue' [args] do compositeStatement} [('else' | 'ensure') compositeStatement] 'end'
-  private static boolean function_4(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_4")) return false;
+  private static boolean function_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_3")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, BEGIN);
     result_ = result_ && compositeStatement(builder_, level_ + 1);
-    result_ = result_ && function_4_2(builder_, level_ + 1);
-    result_ = result_ && function_4_3(builder_, level_ + 1);
+    result_ = result_ && function_3_2(builder_, level_ + 1);
+    result_ = result_ && function_3_3(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, END);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
   // 'rescue' [args] do compositeStatement
-  private static boolean function_4_2(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_4_2")) return false;
+  private static boolean function_3_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_3_2")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, RESCUE);
-    result_ = result_ && function_4_2_1(builder_, level_ + 1);
+    result_ = result_ && function_3_2_1(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, DO);
     result_ = result_ && compositeStatement(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
@@ -1014,33 +1039,33 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // [args]
-  private static boolean function_4_2_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_4_2_1")) return false;
+  private static boolean function_3_2_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_3_2_1")) return false;
     args(builder_, level_ + 1);
     return true;
   }
 
   // [('else' | 'ensure') compositeStatement]
-  private static boolean function_4_3(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_4_3")) return false;
-    function_4_3_0(builder_, level_ + 1);
+  private static boolean function_3_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_3_3")) return false;
+    function_3_3_0(builder_, level_ + 1);
     return true;
   }
 
   // ('else' | 'ensure') compositeStatement
-  private static boolean function_4_3_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_4_3_0")) return false;
+  private static boolean function_3_3_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_3_3_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
-    result_ = function_4_3_0_0(builder_, level_ + 1);
+    result_ = function_3_3_0_0(builder_, level_ + 1);
     result_ = result_ && compositeStatement(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
   // 'else' | 'ensure'
-  private static boolean function_4_3_0_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_4_3_0_0")) return false;
+  private static boolean function_3_3_0_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_3_3_0_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, ELSE);
@@ -1050,73 +1075,80 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // 'class' IDENT ['<' IDENT]  [compositeStatement] 'end'
-  private static boolean function_5(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_5")) return false;
+  private static boolean function_4(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_4")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeTokens(builder_, 0, CLASS, IDENT);
-    result_ = result_ && function_5_2(builder_, level_ + 1);
-    result_ = result_ && function_5_3(builder_, level_ + 1);
+    result_ = result_ && function_4_2(builder_, level_ + 1);
+    result_ = result_ && function_4_3(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, END);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
   // ['<' IDENT]
-  private static boolean function_5_2(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_5_2")) return false;
+  private static boolean function_4_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_4_2")) return false;
     parseTokens(builder_, 0, LESS, IDENT);
     return true;
   }
 
   // [compositeStatement]
-  private static boolean function_5_3(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_5_3")) return false;
+  private static boolean function_4_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_4_3")) return false;
     compositeStatement(builder_, level_ + 1);
     return true;
   }
 
   // 'module' IDENT [compositeStatement] 'end'
-  private static boolean function_6(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_6")) return false;
+  private static boolean function_5(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_5")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeTokens(builder_, 0, MODULE, IDENT);
-    result_ = result_ && function_6_2(builder_, level_ + 1);
+    result_ = result_ && function_5_2(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, END);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
   // [compositeStatement]
-  private static boolean function_6_2(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_6_2")) return false;
+  private static boolean function_5_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_5_2")) return false;
     compositeStatement(builder_, level_ + 1);
     return true;
   }
 
-  // 'def' fname argDecl compositeStatement 'end'
-  private static boolean function_7(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_7")) return false;
+  // 'def' fname argDecl [compositeStatement] 'end'
+  private static boolean function_6(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_6")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, DEF);
     result_ = result_ && fname(builder_, level_ + 1);
     result_ = result_ && argDecl(builder_, level_ + 1);
-    result_ = result_ && compositeStatement(builder_, level_ + 1);
+    result_ = result_ && function_6_3(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, END);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
+  // [compositeStatement]
+  private static boolean function_6_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_6_3")) return false;
+    compositeStatement(builder_, level_ + 1);
+    return true;
+  }
+
   // 'def' singleton ('.' | '::') fname argDecl compositeStatement 'end'
-  private static boolean function_8(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_8")) return false;
+  private static boolean function_7(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_7")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, DEF);
     result_ = result_ && singleton(builder_, level_ + 1);
-    result_ = result_ && function_8_2(builder_, level_ + 1);
+    result_ = result_ && function_7_2(builder_, level_ + 1);
     result_ = result_ && fname(builder_, level_ + 1);
     result_ = result_ && argDecl(builder_, level_ + 1);
     result_ = result_ && compositeStatement(builder_, level_ + 1);
@@ -1126,8 +1158,8 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // '.' | '::'
-  private static boolean function_8_2(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "function_8_2")) return false;
+  private static boolean function_7_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "function_7_2")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, DOT);
@@ -1149,23 +1181,21 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // statements | expressions | primary | function
+  // statements | expressions
   static boolean item_(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "item_")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = statements(builder_, level_ + 1);
     if (!result_) result_ = expressions(builder_, level_ + 1);
-    if (!result_) result_ = primary(builder_, level_ + 1);
-    if (!result_) result_ = function(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
   /* ********************************************************** */
   // variable
-  //    | primary '[' [args] ']'
-  //    | primary '.' IDENT
+  //    | primaries '[' [args] ']'
+  //    | primaries '.' IDENT
   public static boolean lhs(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "lhs")) return false;
     boolean result_;
@@ -1177,12 +1207,12 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     return result_;
   }
 
-  // primary '[' [args] ']'
+  // primaries '[' [args] ']'
   private static boolean lhs_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "lhs_1")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
-    result_ = primary(builder_, level_ + 1);
+    result_ = primaries(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, LEFT_BRACKET);
     result_ = result_ && lhs_1_2(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, RIGHT_BRACKET);
@@ -1197,12 +1227,12 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // primary '.' IDENT
+  // primaries '.' IDENT
   private static boolean lhs_2(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "lhs_2")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
-    result_ = primary(builder_, level_ + 1);
+    result_ = primaries(builder_, level_ + 1);
     result_ = result_ && consumeTokens(builder_, 0, DOT, IDENT);
     exit_section_(builder_, marker_, null, result_);
     return result_;
@@ -1457,20 +1487,43 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // primary [primaries]
+  public static boolean primaries(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primaries")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, PRIMARIES, "<primaries>");
+    result_ = primary(builder_, level_ + 1);
+    result_ = result_ && primaries_1(builder_, level_ + 1);
+    exit_section_(builder_, level_, marker_, result_, false, null);
+    return result_;
+  }
+
+  // [primaries]
+  private static boolean primaries_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primaries_1")) return false;
+    primaries(builder_, level_ + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
   // '(' compositeStatement ')'
   // | literal
   // | variable
-  // //| primary '::' IDENT
-  // //| '::' IDENT
-  // //| primary '[' [args] ']'
-  // //| '[' [args [',']] ']'
-  // //| '{' [args | assocs [',']] '}'
-  // //| 'return' ['(' [callArgs] ')']
-  // //| 'yield' ['(' [callArgs] ')']
-  // //| 'defined?' '(' arg ')'
-  // //| function
-  // //| function '{' ['|' [blockVariable] '|'] compositeStatement '}'
+  // | '::' IDENT
+  // | '[' [args] ']'
+  // | '[' [args [',']] ']'
+  // | '{' [args | assocs [',']] '}'
+  // | 'return' ['(' [callArgs] ')']
+  // | 'yield' ['(' [callArgs] ')']
+  // | 'defined?' '(' arg ')'
+  // | ('.' | '::') operation ['(' [callArgs] ')']
+  // | function
+  // | function '{' ['|' [blockVariable] '|'] compositeStatement '}'
   // | 'if' expression 'then' compositeStatement ['elsif' expression 'then' compositeStatement] ['else' compositeStatement] 'end'
+  // | 'unless' expression 'then' compositeStatement ['else' compositeStatement] 'end'
+  // | 'while' expression 'do' compositeStatement 'end'
+  // | 'until' expression 'do' compositeStatement 'end'
+  // | 'case' compositeStatement 'when' whenArgs 'then' compositeStatement {'when' whenArgs 'then' compositeStatement} ['else' compositeStatement] 'end'
   public static boolean primary(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "primary")) return false;
     boolean result_;
@@ -1478,7 +1531,21 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     result_ = primary_0(builder_, level_ + 1);
     if (!result_) result_ = literal(builder_, level_ + 1);
     if (!result_) result_ = variable(builder_, level_ + 1);
-    if (!result_) result_ = primary_3(builder_, level_ + 1);
+    if (!result_) result_ = parseTokens(builder_, 0, NAMESPACE, IDENT);
+    if (!result_) result_ = primary_4(builder_, level_ + 1);
+    if (!result_) result_ = primary_5(builder_, level_ + 1);
+    if (!result_) result_ = primary_6(builder_, level_ + 1);
+    if (!result_) result_ = primary_7(builder_, level_ + 1);
+    if (!result_) result_ = primary_8(builder_, level_ + 1);
+    if (!result_) result_ = primary_9(builder_, level_ + 1);
+    if (!result_) result_ = primary_10(builder_, level_ + 1);
+    if (!result_) result_ = function(builder_, level_ + 1);
+    if (!result_) result_ = primary_12(builder_, level_ + 1);
+    if (!result_) result_ = primary_13(builder_, level_ + 1);
+    if (!result_) result_ = primary_14(builder_, level_ + 1);
+    if (!result_) result_ = primary_15(builder_, level_ + 1);
+    if (!result_) result_ = primary_16(builder_, level_ + 1);
+    if (!result_) result_ = primary_17(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
   }
@@ -1495,32 +1562,312 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     return result_;
   }
 
+  // '[' [args] ']'
+  private static boolean primary_4(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_4")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, LEFT_BRACKET);
+    result_ = result_ && primary_4_1(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, RIGHT_BRACKET);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // [args]
+  private static boolean primary_4_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_4_1")) return false;
+    args(builder_, level_ + 1);
+    return true;
+  }
+
+  // '[' [args [',']] ']'
+  private static boolean primary_5(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_5")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, LEFT_BRACKET);
+    result_ = result_ && primary_5_1(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, RIGHT_BRACKET);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // [args [',']]
+  private static boolean primary_5_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_5_1")) return false;
+    primary_5_1_0(builder_, level_ + 1);
+    return true;
+  }
+
+  // args [',']
+  private static boolean primary_5_1_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_5_1_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = args(builder_, level_ + 1);
+    result_ = result_ && primary_5_1_0_1(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // [',']
+  private static boolean primary_5_1_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_5_1_0_1")) return false;
+    consumeToken(builder_, COMMA);
+    return true;
+  }
+
+  // '{' [args | assocs [',']] '}'
+  private static boolean primary_6(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_6")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, LEFT_BRACE);
+    result_ = result_ && primary_6_1(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, RIGHT_BRACE);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // [args | assocs [',']]
+  private static boolean primary_6_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_6_1")) return false;
+    primary_6_1_0(builder_, level_ + 1);
+    return true;
+  }
+
+  // args | assocs [',']
+  private static boolean primary_6_1_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_6_1_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = args(builder_, level_ + 1);
+    if (!result_) result_ = primary_6_1_0_1(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // assocs [',']
+  private static boolean primary_6_1_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_6_1_0_1")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = assocs(builder_, level_ + 1);
+    result_ = result_ && primary_6_1_0_1_1(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // [',']
+  private static boolean primary_6_1_0_1_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_6_1_0_1_1")) return false;
+    consumeToken(builder_, COMMA);
+    return true;
+  }
+
+  // 'return' ['(' [callArgs] ')']
+  private static boolean primary_7(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_7")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, RETURN);
+    result_ = result_ && primary_7_1(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // ['(' [callArgs] ')']
+  private static boolean primary_7_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_7_1")) return false;
+    primary_7_1_0(builder_, level_ + 1);
+    return true;
+  }
+
+  // '(' [callArgs] ')'
+  private static boolean primary_7_1_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_7_1_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, LEFT_PAREN);
+    result_ = result_ && primary_7_1_0_1(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, RIGHT_PAREN);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // [callArgs]
+  private static boolean primary_7_1_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_7_1_0_1")) return false;
+    callArgs(builder_, level_ + 1);
+    return true;
+  }
+
+  // 'yield' ['(' [callArgs] ')']
+  private static boolean primary_8(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_8")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, YIELD);
+    result_ = result_ && primary_8_1(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // ['(' [callArgs] ')']
+  private static boolean primary_8_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_8_1")) return false;
+    primary_8_1_0(builder_, level_ + 1);
+    return true;
+  }
+
+  // '(' [callArgs] ')'
+  private static boolean primary_8_1_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_8_1_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, LEFT_PAREN);
+    result_ = result_ && primary_8_1_0_1(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, RIGHT_PAREN);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // [callArgs]
+  private static boolean primary_8_1_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_8_1_0_1")) return false;
+    callArgs(builder_, level_ + 1);
+    return true;
+  }
+
+  // 'defined?' '(' arg ')'
+  private static boolean primary_9(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_9")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, "defined?");
+    result_ = result_ && consumeToken(builder_, LEFT_PAREN);
+    result_ = result_ && arg(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, RIGHT_PAREN);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // ('.' | '::') operation ['(' [callArgs] ')']
+  private static boolean primary_10(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_10")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = primary_10_0(builder_, level_ + 1);
+    result_ = result_ && operation(builder_, level_ + 1);
+    result_ = result_ && primary_10_2(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // '.' | '::'
+  private static boolean primary_10_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_10_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, DOT);
+    if (!result_) result_ = consumeToken(builder_, NAMESPACE);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // ['(' [callArgs] ')']
+  private static boolean primary_10_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_10_2")) return false;
+    primary_10_2_0(builder_, level_ + 1);
+    return true;
+  }
+
+  // '(' [callArgs] ')'
+  private static boolean primary_10_2_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_10_2_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, LEFT_PAREN);
+    result_ = result_ && primary_10_2_0_1(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, RIGHT_PAREN);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // [callArgs]
+  private static boolean primary_10_2_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_10_2_0_1")) return false;
+    callArgs(builder_, level_ + 1);
+    return true;
+  }
+
+  // function '{' ['|' [blockVariable] '|'] compositeStatement '}'
+  private static boolean primary_12(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_12")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = function(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, LEFT_BRACE);
+    result_ = result_ && primary_12_2(builder_, level_ + 1);
+    result_ = result_ && compositeStatement(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, RIGHT_BRACE);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // ['|' [blockVariable] '|']
+  private static boolean primary_12_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_12_2")) return false;
+    primary_12_2_0(builder_, level_ + 1);
+    return true;
+  }
+
+  // '|' [blockVariable] '|'
+  private static boolean primary_12_2_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_12_2_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, PIPE);
+    result_ = result_ && primary_12_2_0_1(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, PIPE);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // [blockVariable]
+  private static boolean primary_12_2_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_12_2_0_1")) return false;
+    blockVariable(builder_, level_ + 1);
+    return true;
+  }
+
   // 'if' expression 'then' compositeStatement ['elsif' expression 'then' compositeStatement] ['else' compositeStatement] 'end'
-  private static boolean primary_3(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "primary_3")) return false;
+  private static boolean primary_13(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_13")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, IF);
     result_ = result_ && expression(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, THEN);
     result_ = result_ && compositeStatement(builder_, level_ + 1);
-    result_ = result_ && primary_3_4(builder_, level_ + 1);
-    result_ = result_ && primary_3_5(builder_, level_ + 1);
+    result_ = result_ && primary_13_4(builder_, level_ + 1);
+    result_ = result_ && primary_13_5(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, END);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
   // ['elsif' expression 'then' compositeStatement]
-  private static boolean primary_3_4(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "primary_3_4")) return false;
-    primary_3_4_0(builder_, level_ + 1);
+  private static boolean primary_13_4(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_13_4")) return false;
+    primary_13_4_0(builder_, level_ + 1);
     return true;
   }
 
   // 'elsif' expression 'then' compositeStatement
-  private static boolean primary_3_4_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "primary_3_4_0")) return false;
+  private static boolean primary_13_4_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_13_4_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, ELSIF);
@@ -1532,15 +1879,125 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // ['else' compositeStatement]
-  private static boolean primary_3_5(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "primary_3_5")) return false;
-    primary_3_5_0(builder_, level_ + 1);
+  private static boolean primary_13_5(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_13_5")) return false;
+    primary_13_5_0(builder_, level_ + 1);
     return true;
   }
 
   // 'else' compositeStatement
-  private static boolean primary_3_5_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "primary_3_5_0")) return false;
+  private static boolean primary_13_5_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_13_5_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, ELSE);
+    result_ = result_ && compositeStatement(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // 'unless' expression 'then' compositeStatement ['else' compositeStatement] 'end'
+  private static boolean primary_14(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_14")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, "unless");
+    result_ = result_ && expression(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, THEN);
+    result_ = result_ && compositeStatement(builder_, level_ + 1);
+    result_ = result_ && primary_14_4(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, END);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // ['else' compositeStatement]
+  private static boolean primary_14_4(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_14_4")) return false;
+    primary_14_4_0(builder_, level_ + 1);
+    return true;
+  }
+
+  // 'else' compositeStatement
+  private static boolean primary_14_4_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_14_4_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, ELSE);
+    result_ = result_ && compositeStatement(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // 'while' expression 'do' compositeStatement 'end'
+  private static boolean primary_15(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_15")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, "while");
+    result_ = result_ && expression(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, DO);
+    result_ = result_ && compositeStatement(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, END);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // 'until' expression 'do' compositeStatement 'end'
+  private static boolean primary_16(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_16")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, UNTIL);
+    result_ = result_ && expression(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, DO);
+    result_ = result_ && compositeStatement(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, END);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // 'case' compositeStatement 'when' whenArgs 'then' compositeStatement {'when' whenArgs 'then' compositeStatement} ['else' compositeStatement] 'end'
+  private static boolean primary_17(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_17")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, CASE);
+    result_ = result_ && compositeStatement(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, WHEN);
+    result_ = result_ && whenArgs(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, THEN);
+    result_ = result_ && compositeStatement(builder_, level_ + 1);
+    result_ = result_ && primary_17_6(builder_, level_ + 1);
+    result_ = result_ && primary_17_7(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, END);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // 'when' whenArgs 'then' compositeStatement
+  private static boolean primary_17_6(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_17_6")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, WHEN);
+    result_ = result_ && whenArgs(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, THEN);
+    result_ = result_ && compositeStatement(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // ['else' compositeStatement]
+  private static boolean primary_17_7(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_17_7")) return false;
+    primary_17_7_0(builder_, level_ + 1);
+    return true;
+  }
+
+  // 'else' compositeStatement
+  private static boolean primary_17_7_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "primary_17_7_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, ELSE);
@@ -1575,12 +2032,13 @@ public class CrystalParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // call 'do' ['|' [blockVariable] '|'] compositeStatement 'end'
-  // //   | 'if' expression
+  //    | 'if' expression
   //    | 'undef' fname
   //    | 'alias' fname fname
   //    | 'while' expression
   //    | 'unless' expression
   //    | 'until' expression
+  //    | 'require' STRING_LITERAL
   //    | 'begin' '{' compositeStatement '}'
   //    | 'end' '{' compositeStatement '}'
   //    | lhs '=' command ['do' ['|' [blockVariable] '|'] compositeStatement 'end']
@@ -1596,8 +2054,10 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = statement_4(builder_, level_ + 1);
     if (!result_) result_ = statement_5(builder_, level_ + 1);
     if (!result_) result_ = statement_6(builder_, level_ + 1);
-    if (!result_) result_ = statement_7(builder_, level_ + 1);
+    if (!result_) result_ = parseTokens(builder_, 0, REQUIRE, STRING_LITERAL);
     if (!result_) result_ = statement_8(builder_, level_ + 1);
+    if (!result_) result_ = statement_9(builder_, level_ + 1);
+    if (!result_) result_ = statement_10(builder_, level_ + 1);
     if (!result_) result_ = expression(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
@@ -1643,9 +2103,20 @@ public class CrystalParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // 'undef' fname
+  // 'if' expression
   private static boolean statement_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "statement_1")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, IF);
+    result_ = result_ && expression(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // 'undef' fname
+  private static boolean statement_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_2")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, "undef");
@@ -1655,8 +2126,8 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // 'alias' fname fname
-  private static boolean statement_2(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "statement_2")) return false;
+  private static boolean statement_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_3")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, ALIAS);
@@ -1667,8 +2138,8 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // 'while' expression
-  private static boolean statement_3(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "statement_3")) return false;
+  private static boolean statement_4(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_4")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, "while");
@@ -1678,8 +2149,8 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // 'unless' expression
-  private static boolean statement_4(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "statement_4")) return false;
+  private static boolean statement_5(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_5")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, "unless");
@@ -1689,8 +2160,8 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // 'until' expression
-  private static boolean statement_5(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "statement_5")) return false;
+  private static boolean statement_6(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_6")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, UNTIL);
@@ -1700,8 +2171,8 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // 'begin' '{' compositeStatement '}'
-  private static boolean statement_6(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "statement_6")) return false;
+  private static boolean statement_8(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_8")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeTokens(builder_, 0, BEGIN, LEFT_BRACE);
@@ -1712,8 +2183,8 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // 'end' '{' compositeStatement '}'
-  private static boolean statement_7(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "statement_7")) return false;
+  private static boolean statement_9(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_9")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeTokens(builder_, 0, END, LEFT_BRACE);
@@ -1724,32 +2195,32 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // lhs '=' command ['do' ['|' [blockVariable] '|'] compositeStatement 'end']
-  private static boolean statement_8(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "statement_8")) return false;
+  private static boolean statement_10(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_10")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = lhs(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, EQUAL);
     result_ = result_ && command(builder_, level_ + 1);
-    result_ = result_ && statement_8_3(builder_, level_ + 1);
+    result_ = result_ && statement_10_3(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
   // ['do' ['|' [blockVariable] '|'] compositeStatement 'end']
-  private static boolean statement_8_3(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "statement_8_3")) return false;
-    statement_8_3_0(builder_, level_ + 1);
+  private static boolean statement_10_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_10_3")) return false;
+    statement_10_3_0(builder_, level_ + 1);
     return true;
   }
 
   // 'do' ['|' [blockVariable] '|'] compositeStatement 'end'
-  private static boolean statement_8_3_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "statement_8_3_0")) return false;
+  private static boolean statement_10_3_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_10_3_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, DO);
-    result_ = result_ && statement_8_3_0_1(builder_, level_ + 1);
+    result_ = result_ && statement_10_3_0_1(builder_, level_ + 1);
     result_ = result_ && compositeStatement(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, END);
     exit_section_(builder_, marker_, null, result_);
@@ -1757,27 +2228,27 @@ public class CrystalParser implements PsiParser, LightPsiParser {
   }
 
   // ['|' [blockVariable] '|']
-  private static boolean statement_8_3_0_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "statement_8_3_0_1")) return false;
-    statement_8_3_0_1_0(builder_, level_ + 1);
+  private static boolean statement_10_3_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_10_3_0_1")) return false;
+    statement_10_3_0_1_0(builder_, level_ + 1);
     return true;
   }
 
   // '|' [blockVariable] '|'
-  private static boolean statement_8_3_0_1_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "statement_8_3_0_1_0")) return false;
+  private static boolean statement_10_3_0_1_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_10_3_0_1_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = consumeToken(builder_, PIPE);
-    result_ = result_ && statement_8_3_0_1_0_1(builder_, level_ + 1);
+    result_ = result_ && statement_10_3_0_1_0_1(builder_, level_ + 1);
     result_ = result_ && consumeToken(builder_, PIPE);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
   // [blockVariable]
-  private static boolean statement_8_3_0_1_0_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "statement_8_3_0_1_0_1")) return false;
+  private static boolean statement_10_3_0_1_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "statement_10_3_0_1_0_1")) return false;
     blockVariable(builder_, level_ + 1);
     return true;
   }

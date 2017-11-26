@@ -32,9 +32,6 @@ public interface CrystalFunction extends PsiElement {
   CrystalOperation getOperation();
 
   @Nullable
-  CrystalPrimary getPrimary();
-
-  @Nullable
   CrystalSingleton getSingleton();
 
 }

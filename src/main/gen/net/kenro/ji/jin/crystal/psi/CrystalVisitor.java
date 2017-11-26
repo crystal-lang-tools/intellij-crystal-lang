@@ -99,6 +99,10 @@ public class CrystalVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitPrimaries(@NotNull CrystalPrimaries o) {
+    visitPsiElement(o);
+  }
+
   public void visitPrimary(@NotNull CrystalPrimary o) {
     visitPsiElement(o);
   }

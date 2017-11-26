@@ -40,8 +40,14 @@ public class CrystalArgImpl extends ASTWrapperPsiElement implements CrystalArg {
 
   @Override
   @Nullable
-  public CrystalPrimary getPrimary() {
-    return findChildByClass(CrystalPrimary.class);
+  public CrystalOpAsgn getOpAsgn() {
+    return findChildByClass(CrystalOpAsgn.class);
+  }
+
+  @Override
+  @Nullable
+  public CrystalPrimaries getPrimaries() {
+    return findChildByClass(CrystalPrimaries.class);
   }
 
 }

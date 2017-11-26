@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface CrystalArgs extends PsiElement {
-
-  @NotNull
-  List<CrystalArg> getArgList();
+public interface CrystalPrimaries extends PsiElement {
 
   @Nullable
-  CrystalArgs getArgs();
+  CrystalPrimaries getPrimaries();
+
+  @NotNull
+  CrystalPrimary getPrimary();
 
 }

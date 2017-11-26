@@ -204,6 +204,15 @@
     ]
 }
 
+
+// 1. https://github.com/goruby/goruby/blob/master/goruby.bnf
+// 2. http://docs.huihoo.com/ruby/ruby-man-1.4/yacc.html
+// 3. https://www.cse.buffalo.edu/~regan/cse305/RubyBNF.pdf  -- THIS ONE CURRENTLY
+
+// 4. https://docs.ruby-lang.org/ja/latest/doc/spec=2fbnf.html  -- 2.4 ?? Interesting
+
+// maybe merge 1, 3 and 4 ??
+
 crystalFile ::= item_*
 
 private item_ ::= (statements | expressions)

@@ -27,9 +27,9 @@ public class CrystalSingletonImpl extends ASTWrapperPsiElement implements Crysta
   }
 
   @Override
-  @Nullable
-  public CrystalExpressions getExpressions() {
-    return findChildByClass(CrystalExpressions.class);
+  @NotNull
+  public List<CrystalExpression> getExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalExpression.class);
   }
 
   @Override

@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface CrystalArgs extends PsiElement {
+public interface CrystalAssocArray extends PsiElement {
 
   @NotNull
-  List<CrystalArg> getArgList();
-
-  @Nullable
-  CrystalArgs getArgs();
+  CrystalAssoc getAssoc();
 
 }

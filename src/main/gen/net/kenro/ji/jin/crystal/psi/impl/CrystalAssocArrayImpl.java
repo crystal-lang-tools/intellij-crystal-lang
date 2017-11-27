@@ -11,19 +11,25 @@ import static net.kenro.ji.jin.crystal.psi.CrystalElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import net.kenro.ji.jin.crystal.psi.*;
 
-public class CrystalOperationImpl extends ASTWrapperPsiElement implements CrystalOperation {
+public class CrystalAssocArrayImpl extends ASTWrapperPsiElement implements CrystalAssocArray {
 
-  public CrystalOperationImpl(ASTNode node) {
+  public CrystalAssocArrayImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull CrystalVisitor visitor) {
-    visitor.visitOperation(this);
+    visitor.visitAssocArray(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof CrystalVisitor) accept((CrystalVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public CrystalAssoc getAssoc() {
+    return findNotNullChildByClass(CrystalAssoc.class);
   }
 
 }

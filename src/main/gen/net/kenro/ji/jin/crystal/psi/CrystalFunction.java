@@ -10,28 +10,46 @@ public interface CrystalFunction extends PsiElement {
   @Nullable
   CrystalArgDecl getArgDecl();
 
-  @Nullable
-  CrystalArgs getArgs();
+  @NotNull
+  List<CrystalAssoc> getAssocList();
 
-  @Nullable
-  CrystalBlockVariable getBlockVariable();
+  @NotNull
+  List<CrystalAssocArray> getAssocArrayList();
 
-  @Nullable
-  CrystalCallArgs getCallArgs();
+  @NotNull
+  List<CrystalBlockVariable> getBlockVariableList();
 
-  @Nullable
-  CrystalCompositeStatement getCompositeStatement();
-
-  @Nullable
-  CrystalExpression getExpression();
+  @NotNull
+  List<CrystalExpression> getExpressionList();
 
   @Nullable
   CrystalFname getFname();
 
-  @Nullable
-  CrystalOperation getOperation();
+  @NotNull
+  List<CrystalFunction> getFunctionList();
+
+  @NotNull
+  List<CrystalLhs> getLhsList();
+
+  @NotNull
+  List<CrystalLiteral> getLiteralList();
+
+  @NotNull
+  List<CrystalOpAsgn> getOpAsgnList();
 
   @Nullable
   CrystalSingleton getSingleton();
+
+  @NotNull
+  List<CrystalStatement> getStatementList();
+
+  @NotNull
+  List<CrystalTuple> getTupleList();
+
+  @NotNull
+  List<CrystalVariable> getVariableList();
+
+  @NotNull
+  List<CrystalWhenArgs> getWhenArgsList();
 
 }

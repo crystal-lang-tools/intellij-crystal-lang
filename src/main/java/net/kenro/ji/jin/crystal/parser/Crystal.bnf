@@ -58,8 +58,8 @@
         MODULE =                             "module"
         MACRO_BLOCK_CLOSE =                  "%}"
         MACRO_BLOCK_OPEN =                   "{%"
-        MACRO_STATEMENT_OPEN =               "{{"
-        MACRO_STATEMENT_CLOSE =              "}}"
+//        MACRO_STATEMENT_OPEN =               "{{"
+//        MACRO_STATEMENT_CLOSE =              "}}"
         ARRAY_EQUAL =                        "[]="
         ARRAY_BOOL =                         "[]?"
         ARRAY =                              "[]"
@@ -217,9 +217,9 @@ crystalFile ::= item_*
 
 private item_ ::= (statements | expressions)
 
-compositeStatement ::= (statements | expressions)
+private compositeStatement ::= (statements | expressions)
 
-statements ::= statement [statements]
+private statements ::= statement [statements]
 
 statement ::=
     call 'do' ['|' [blockVariable] '|'] compositeStatement 'end'
@@ -235,7 +235,7 @@ statement ::=
    | lhs '=' command ['do' ['|' [blockVariable] '|'] compositeStatement 'end']
    | expression
 
-expressions ::= expression [expressions]
+private expressions ::= expression [expressions]
 
 expression ::=
   mlhs '=' mrhs
@@ -250,7 +250,7 @@ expression ::=
 
 call ::= function | command
 
-command ::= operation callArgs
+private command ::= operation callArgs
          | primaries '.' operation callArgs
          | primaries '::' operation callArgs
          | 'super' callArgs
@@ -280,15 +280,15 @@ lhs ::=
 
 mrhs ::= args [',' '*' arg] | '*' arg
 
-callArgs ::= args
+private callArgs ::= args
        | args [',' assocs] [',' '*' args] [',' '&' arg]
        | assocs [',' '*' args] [',' '&' arg]
        | '*' arg [',' '&' arg] | '&' arg
        | command
 
-args ::= arg (',' arg)* [args]
+private args ::= arg [',' args]
 
-arg ::= lhs '=' arg
+private arg ::= lhs '=' arg
   | lhs opAsgn arg
   | ('..' | '...' | '+'  | '-'  | '*'  | '/'  | '%'  | '**'  | '|'  | '^'
     | '&' | '<=>' | '>'  | '>=' | '<'  | '<=' | '==' | '===' | '!=' | '='
@@ -296,15 +296,16 @@ arg ::= lhs '=' arg
   | 'defined?' arg
   | primaries
 
-primaries ::= primary [primaries]
+private primaries ::= primary [primaries]
 
-primary ::= '(' compositeStatement ')'
+private primary ::= '(' compositeStatement ')'
 | literal
 | variable
 | '::' IDENT
 | '[' [args] ']'
 | '[' [args [',']] ']'
-| '{' [args | assocs [',']] '}'
+| assocArrays
+| tuples
 | 'return' ['(' [callArgs] ')']
 | 'yield' ['(' [callArgs] ')']
 | 'defined?' '(' arg ')'
@@ -319,6 +320,10 @@ primary ::= '(' compositeStatement ')'
 | 'puts' args
 | 'break'
 
+tuple ::= '{' args '}'
+
+private tuples ::= tuple [',' tuple]
+
 argDecl ::= '(' argList ')' | argList
 
 argList ::= IDENT (',' IDENT)* [',' '*' [IDENT]][',' '&' IDENT]
@@ -328,7 +333,11 @@ argList ::= IDENT (',' IDENT)* [',' '*' [IDENT]][',' '&' IDENT]
 
 singleton ::= variable | '(' expressions ')'
 
-assocs ::= assoc {',' assoc}
+private assocArrays ::= assocArray [',' assocArrays]
+
+assocArray ::= '{' assocs '}'
+
+private assocs ::= assoc [',' assocs]
 
 assoc ::= arg '=>' arg
 
@@ -350,7 +359,7 @@ symbol ::= ':' (fname | varName)
 fname ::=  IDENT | '..' | '|' | '^'|'&'| '<=>' | '==' | '===' | '=~'  | '>' | '>=' | '<' | '<=' | '+' | '-' | '*' | '/'
              | '%'| '**' | '<<' | '>>' | '~' | '+@' | '-@' | '[]' | '[]='
 
-operation ::= IDENT ['!' | '?']
+private operation ::= IDENT ['!' | '?']
 
 varName ::= global | '@' IDENT | IDENT
 

@@ -27,6 +27,18 @@ public class CrystalStatementImpl extends ASTWrapperPsiElement implements Crysta
   }
 
   @Override
+  @NotNull
+  public List<CrystalAssoc> getAssocList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalAssoc.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalAssocArray> getAssocArrayList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalAssocArray.class);
+  }
+
+  @Override
   @Nullable
   public CrystalBlockVariable getBlockVariable() {
     return findChildByClass(CrystalBlockVariable.class);
@@ -39,21 +51,9 @@ public class CrystalStatementImpl extends ASTWrapperPsiElement implements Crysta
   }
 
   @Override
-  @Nullable
-  public CrystalCommand getCommand() {
-    return findChildByClass(CrystalCommand.class);
-  }
-
-  @Override
-  @Nullable
-  public CrystalCompositeStatement getCompositeStatement() {
-    return findChildByClass(CrystalCompositeStatement.class);
-  }
-
-  @Override
-  @Nullable
-  public CrystalExpression getExpression() {
-    return findChildByClass(CrystalExpression.class);
+  @NotNull
+  public List<CrystalExpression> getExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalExpression.class);
   }
 
   @Override
@@ -63,9 +63,51 @@ public class CrystalStatementImpl extends ASTWrapperPsiElement implements Crysta
   }
 
   @Override
-  @Nullable
-  public CrystalLhs getLhs() {
-    return findChildByClass(CrystalLhs.class);
+  @NotNull
+  public List<CrystalFunction> getFunctionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalFunction.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalLhs> getLhsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalLhs.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalLiteral> getLiteralList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalLiteral.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalOpAsgn> getOpAsgnList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalOpAsgn.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalStatement> getStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalTuple> getTupleList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalTuple.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalVariable> getVariableList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalVariable.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalWhenArgs> getWhenArgsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalWhenArgs.class);
   }
 
 }

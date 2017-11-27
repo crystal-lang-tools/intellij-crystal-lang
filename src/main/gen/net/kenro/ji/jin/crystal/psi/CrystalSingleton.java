@@ -7,8 +7,8 @@ import com.intellij.psi.PsiElement;
 
 public interface CrystalSingleton extends PsiElement {
 
-  @Nullable
-  CrystalExpressions getExpressions();
+  @NotNull
+  List<CrystalExpression> getExpressionList();
 
   @Nullable
   CrystalVariable getVariable();

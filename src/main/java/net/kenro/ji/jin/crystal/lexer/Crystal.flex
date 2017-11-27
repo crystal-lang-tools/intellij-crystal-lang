@@ -83,8 +83,8 @@ CHAR_LITERAL='(\\.|\\x{HEX_CHAR}+|[^\\'])'
   "module"                { return MODULE; }
   "%}"                    { return MACRO_BLOCK_CLOSE; }
   "{%"                    { return MACRO_BLOCK_OPEN; }
-  "{{"                    { return MACRO_STATEMENT_OPEN; }
-  "}}"                    { return MACRO_STATEMENT_CLOSE; }
+//  "{{"                    { return MACRO_STATEMENT_OPEN; } can't tell between {{}} and macros so handle in BNF?
+//  "}}"                    { return MACRO_STATEMENT_CLOSE; }
   "[]="                   { return ARRAY_EQUAL; }
   "[]?"                   { return ARRAY_BOOL; }
   "[]"                    { return ARRAY; }

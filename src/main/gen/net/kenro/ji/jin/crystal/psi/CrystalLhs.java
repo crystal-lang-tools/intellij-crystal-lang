@@ -7,13 +7,40 @@ import com.intellij.psi.PsiElement;
 
 public interface CrystalLhs extends PsiElement {
 
-  @Nullable
-  CrystalArgs getArgs();
+  @NotNull
+  List<CrystalAssoc> getAssocList();
 
-  @Nullable
-  CrystalPrimaries getPrimaries();
+  @NotNull
+  List<CrystalAssocArray> getAssocArrayList();
 
-  @Nullable
-  CrystalVariable getVariable();
+  @NotNull
+  List<CrystalBlockVariable> getBlockVariableList();
+
+  @NotNull
+  List<CrystalExpression> getExpressionList();
+
+  @NotNull
+  List<CrystalFunction> getFunctionList();
+
+  @NotNull
+  List<CrystalLhs> getLhsList();
+
+  @NotNull
+  List<CrystalLiteral> getLiteralList();
+
+  @NotNull
+  List<CrystalOpAsgn> getOpAsgnList();
+
+  @NotNull
+  List<CrystalStatement> getStatementList();
+
+  @NotNull
+  List<CrystalTuple> getTupleList();
+
+  @NotNull
+  List<CrystalVariable> getVariableList();
+
+  @NotNull
+  List<CrystalWhenArgs> getWhenArgsList();
 
 }

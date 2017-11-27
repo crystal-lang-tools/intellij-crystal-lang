@@ -11,14 +11,14 @@ import static net.kenro.ji.jin.crystal.psi.CrystalElementTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import net.kenro.ji.jin.crystal.psi.*;
 
-public class CrystalExpressionImpl extends ASTWrapperPsiElement implements CrystalExpression {
+public class CrystalTupleImpl extends ASTWrapperPsiElement implements CrystalTuple {
 
-  public CrystalExpressionImpl(ASTNode node) {
+  public CrystalTupleImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull CrystalVisitor visitor) {
-    visitor.visitExpression(this);
+    visitor.visitTuple(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
@@ -66,18 +66,6 @@ public class CrystalExpressionImpl extends ASTWrapperPsiElement implements Cryst
   @NotNull
   public List<CrystalLiteral> getLiteralList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalLiteral.class);
-  }
-
-  @Override
-  @Nullable
-  public CrystalMlhs getMlhs() {
-    return findChildByClass(CrystalMlhs.class);
-  }
-
-  @Override
-  @Nullable
-  public CrystalMrhs getMrhs() {
-    return findChildByClass(CrystalMrhs.class);
   }
 
   @Override

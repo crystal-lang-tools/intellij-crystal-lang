@@ -28,8 +28,74 @@ public class CrystalAssocImpl extends ASTWrapperPsiElement implements CrystalAss
 
   @Override
   @NotNull
-  public List<CrystalArg> getArgList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalArg.class);
+  public List<CrystalAssoc> getAssocList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalAssoc.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalAssocArray> getAssocArrayList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalAssocArray.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalBlockVariable> getBlockVariableList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalBlockVariable.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalExpression> getExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalExpression.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalFunction> getFunctionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalFunction.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalLhs> getLhsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalLhs.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalLiteral> getLiteralList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalLiteral.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalOpAsgn> getOpAsgnList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalOpAsgn.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalStatement> getStatementList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalStatement.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalTuple> getTupleList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalTuple.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalVariable> getVariableList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalVariable.class);
+  }
+
+  @Override
+  @NotNull
+  public List<CrystalWhenArgs> getWhenArgsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, CrystalWhenArgs.class);
   }
 
 }

@@ -7,25 +7,46 @@ import com.intellij.psi.PsiElement;
 
 public interface CrystalStatement extends PsiElement {
 
+  @NotNull
+  List<CrystalAssoc> getAssocList();
+
+  @NotNull
+  List<CrystalAssocArray> getAssocArrayList();
+
   @Nullable
   CrystalBlockVariable getBlockVariable();
 
   @Nullable
   CrystalCall getCall();
 
-  @Nullable
-  CrystalCommand getCommand();
-
-  @Nullable
-  CrystalCompositeStatement getCompositeStatement();
-
-  @Nullable
-  CrystalExpression getExpression();
+  @NotNull
+  List<CrystalExpression> getExpressionList();
 
   @Nullable
   CrystalFname getFname();
 
-  @Nullable
-  CrystalLhs getLhs();
+  @NotNull
+  List<CrystalFunction> getFunctionList();
+
+  @NotNull
+  List<CrystalLhs> getLhsList();
+
+  @NotNull
+  List<CrystalLiteral> getLiteralList();
+
+  @NotNull
+  List<CrystalOpAsgn> getOpAsgnList();
+
+  @NotNull
+  List<CrystalStatement> getStatementList();
+
+  @NotNull
+  List<CrystalTuple> getTupleList();
+
+  @NotNull
+  List<CrystalVariable> getVariableList();
+
+  @NotNull
+  List<CrystalWhenArgs> getWhenArgsList();
 
 }

@@ -8,19 +8,13 @@ import net.kenro.ji.jin.crystal.psi.impl.*;
 
 public interface CrystalElementTypes {
 
-  IElementType ARG = new CrystalElementType("ARG");
-  IElementType ARGS = new CrystalElementType("ARGS");
   IElementType ARG_DECL = new CrystalElementType("ARG_DECL");
   IElementType ARG_LIST = new CrystalElementType("ARG_LIST");
   IElementType ASSOC = new CrystalElementType("ASSOC");
-  IElementType ASSOCS = new CrystalElementType("ASSOCS");
+  IElementType ASSOC_ARRAY = new CrystalElementType("ASSOC_ARRAY");
   IElementType BLOCK_VARIABLE = new CrystalElementType("BLOCK_VARIABLE");
   IElementType CALL = new CrystalElementType("CALL");
-  IElementType CALL_ARGS = new CrystalElementType("CALL_ARGS");
-  IElementType COMMAND = new CrystalElementType("COMMAND");
-  IElementType COMPOSITE_STATEMENT = new CrystalElementType("COMPOSITE_STATEMENT");
   IElementType EXPRESSION = new CrystalElementType("EXPRESSION");
-  IElementType EXPRESSIONS = new CrystalElementType("EXPRESSIONS");
   IElementType FNAME = new CrystalElementType("FNAME");
   IElementType FUNCTION = new CrystalElementType("FUNCTION");
   IElementType GLOBAL = new CrystalElementType("GLOBAL");
@@ -29,14 +23,11 @@ public interface CrystalElementTypes {
   IElementType MLHS = new CrystalElementType("MLHS");
   IElementType MLHS_ITEM = new CrystalElementType("MLHS_ITEM");
   IElementType MRHS = new CrystalElementType("MRHS");
-  IElementType OPERATION = new CrystalElementType("OPERATION");
   IElementType OP_ASGN = new CrystalElementType("OP_ASGN");
-  IElementType PRIMARIES = new CrystalElementType("PRIMARIES");
-  IElementType PRIMARY = new CrystalElementType("PRIMARY");
   IElementType SINGLETON = new CrystalElementType("SINGLETON");
   IElementType STATEMENT = new CrystalElementType("STATEMENT");
-  IElementType STATEMENTS = new CrystalElementType("STATEMENTS");
   IElementType SYMBOL = new CrystalElementType("SYMBOL");
+  IElementType TUPLE = new CrystalElementType("TUPLE");
   IElementType VARIABLE = new CrystalElementType("VARIABLE");
   IElementType VAR_NAME = new CrystalElementType("VAR_NAME");
   IElementType WHEN_ARGS = new CrystalElementType("WHEN_ARGS");
@@ -137,8 +128,6 @@ public interface CrystalElementTypes {
   IElementType MACRO = new CrystalTokenType("macro");
   IElementType MACRO_BLOCK_CLOSE = new CrystalTokenType("%}");
   IElementType MACRO_BLOCK_OPEN = new CrystalTokenType("{%");
-  IElementType MACRO_STATEMENT_CLOSE = new CrystalTokenType("}}");
-  IElementType MACRO_STATEMENT_OPEN = new CrystalTokenType("{{");
   IElementType MINUS = new CrystalTokenType("-");
   IElementType MINUS_EQUAL = new CrystalTokenType("-=");
   IElementType MINUS_GREATER = new CrystalTokenType("->");
@@ -225,13 +214,7 @@ public interface CrystalElementTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-       if (type == ARG) {
-        return new CrystalArgImpl(node);
-      }
-      else if (type == ARGS) {
-        return new CrystalArgsImpl(node);
-      }
-      else if (type == ARG_DECL) {
+       if (type == ARG_DECL) {
         return new CrystalArgDeclImpl(node);
       }
       else if (type == ARG_LIST) {
@@ -240,8 +223,8 @@ public interface CrystalElementTypes {
       else if (type == ASSOC) {
         return new CrystalAssocImpl(node);
       }
-      else if (type == ASSOCS) {
-        return new CrystalAssocsImpl(node);
+      else if (type == ASSOC_ARRAY) {
+        return new CrystalAssocArrayImpl(node);
       }
       else if (type == BLOCK_VARIABLE) {
         return new CrystalBlockVariableImpl(node);
@@ -249,20 +232,8 @@ public interface CrystalElementTypes {
       else if (type == CALL) {
         return new CrystalCallImpl(node);
       }
-      else if (type == CALL_ARGS) {
-        return new CrystalCallArgsImpl(node);
-      }
-      else if (type == COMMAND) {
-        return new CrystalCommandImpl(node);
-      }
-      else if (type == COMPOSITE_STATEMENT) {
-        return new CrystalCompositeStatementImpl(node);
-      }
       else if (type == EXPRESSION) {
         return new CrystalExpressionImpl(node);
-      }
-      else if (type == EXPRESSIONS) {
-        return new CrystalExpressionsImpl(node);
       }
       else if (type == FNAME) {
         return new CrystalFnameImpl(node);
@@ -288,17 +259,8 @@ public interface CrystalElementTypes {
       else if (type == MRHS) {
         return new CrystalMrhsImpl(node);
       }
-      else if (type == OPERATION) {
-        return new CrystalOperationImpl(node);
-      }
       else if (type == OP_ASGN) {
         return new CrystalOpAsgnImpl(node);
-      }
-      else if (type == PRIMARIES) {
-        return new CrystalPrimariesImpl(node);
-      }
-      else if (type == PRIMARY) {
-        return new CrystalPrimaryImpl(node);
       }
       else if (type == SINGLETON) {
         return new CrystalSingletonImpl(node);
@@ -306,11 +268,11 @@ public interface CrystalElementTypes {
       else if (type == STATEMENT) {
         return new CrystalStatementImpl(node);
       }
-      else if (type == STATEMENTS) {
-        return new CrystalStatementsImpl(node);
-      }
       else if (type == SYMBOL) {
         return new CrystalSymbolImpl(node);
+      }
+      else if (type == TUPLE) {
+        return new CrystalTupleImpl(node);
       }
       else if (type == VARIABLE) {
         return new CrystalVariableImpl(node);

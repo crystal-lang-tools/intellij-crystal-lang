@@ -7,10 +7,6 @@ import com.intellij.psi.PsiElement;
 
 public class CrystalVisitor extends PsiElementVisitor {
 
-  public void visitArg(@NotNull CrystalArg o) {
-    visitPsiElement(o);
-  }
-
   public void visitArgDecl(@NotNull CrystalArgDecl o) {
     visitPsiElement(o);
   }
@@ -19,15 +15,11 @@ public class CrystalVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitArgs(@NotNull CrystalArgs o) {
-    visitPsiElement(o);
-  }
-
   public void visitAssoc(@NotNull CrystalAssoc o) {
     visitPsiElement(o);
   }
 
-  public void visitAssocs(@NotNull CrystalAssocs o) {
+  public void visitAssocArray(@NotNull CrystalAssocArray o) {
     visitPsiElement(o);
   }
 
@@ -39,23 +31,7 @@ public class CrystalVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitCallArgs(@NotNull CrystalCallArgs o) {
-    visitPsiElement(o);
-  }
-
-  public void visitCommand(@NotNull CrystalCommand o) {
-    visitPsiElement(o);
-  }
-
-  public void visitCompositeStatement(@NotNull CrystalCompositeStatement o) {
-    visitPsiElement(o);
-  }
-
   public void visitExpression(@NotNull CrystalExpression o) {
-    visitPsiElement(o);
-  }
-
-  public void visitExpressions(@NotNull CrystalExpressions o) {
     visitPsiElement(o);
   }
 
@@ -95,18 +71,6 @@ public class CrystalVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitOperation(@NotNull CrystalOperation o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPrimaries(@NotNull CrystalPrimaries o) {
-    visitPsiElement(o);
-  }
-
-  public void visitPrimary(@NotNull CrystalPrimary o) {
-    visitPsiElement(o);
-  }
-
   public void visitSingleton(@NotNull CrystalSingleton o) {
     visitPsiElement(o);
   }
@@ -115,11 +79,11 @@ public class CrystalVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitStatements(@NotNull CrystalStatements o) {
+  public void visitSymbol(@NotNull CrystalSymbol o) {
     visitPsiElement(o);
   }
 
-  public void visitSymbol(@NotNull CrystalSymbol o) {
+  public void visitTuple(@NotNull CrystalTuple o) {
     visitPsiElement(o);
   }
 

@@ -223,7 +223,7 @@ private statements ::= statement [statements]
 
 statement ::=
     call 'do' ['|' [blockVariable] '|'] compositeStatement 'end'
-   | 'if' expression
+//   | 'if' expression
    | 'undef' fname
    | 'alias' fname fname
    | 'while' expression

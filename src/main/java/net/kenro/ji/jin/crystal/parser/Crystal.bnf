@@ -222,8 +222,7 @@ private compositeStatement ::= (statements | expressions)
 private statements ::= statement [statements]
 
 statement ::=
-    call 'do' ['|' [blockVariable] '|'] compositeStatement 'end'
-//   | 'if' expression
+    [call] 'do' ['|' [blockVariable] '|'] [compositeStatement] 'end'
    | 'undef' fname
    | 'alias' fname fname
    | 'while' expression
@@ -234,13 +233,14 @@ statement ::=
    | 'end' '{' compositeStatement '}'
    | lhs '=' command ['do' ['|' [blockVariable] '|'] compositeStatement 'end']
    | expression
+   | 'if' expression
 
 private expressions ::= expression [expressions]
 
 expression ::=
   mlhs '=' mrhs
 | 'return' callArgs
-| 'yield' callArgs
+| 'yield' [callArgs]
 | 'and' expression
 | 'or' expression
 | 'not' expression
@@ -251,8 +251,7 @@ expression ::=
 call ::= function | command
 
 private command ::= operation callArgs
-         | primaries '.' operation callArgs
-         | primaries '::' operation callArgs
+         | primaries ('.' | '::') operation [callArgs]
          | 'super' callArgs
          | 'loop'
 

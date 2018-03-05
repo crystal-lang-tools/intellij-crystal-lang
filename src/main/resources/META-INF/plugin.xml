@@ -24,7 +24,7 @@
     <!-- Add your extensions here -->
     <fileTypeFactory implementation="net.kenro.ji.jin.crystal.file.CrystalFileTypeFactory"/>
 
-    <lang.parserDefinition language="Crystal" implementationClass="net.kenro.ji.jin.crystal.lexer.CrystalParserDefinition"/>
+   <!-- <lang.parserDefinition language="Crystal" implementationClass="net.kenro.ji.jin.crystal.lexer.CrystalParserDefinition"/> -->
 
     <lang.syntaxHighlighterFactory language="Crystal"
                                    implementationClass="net.kenro.ji.jin.crystal.highlighting.CrystalSyntaxHighlighterFactory"/>
@@ -32,14 +32,14 @@
     <colorSettingsPage
             implementation="net.kenro.ji.jin.crystal.highlighting.CrystalColorSettingsPage" />
 
-    <lang.commenter
+   <!--  <lang.commenter
             language="Crystal"
             implementationClass="net.kenro.ji.jin.crystal.features.CrystalCommenter"/>
 
     <lang.braceMatcher
             language="Crystal"
             implementationClass="net.kenro.ji.jin.crystal.features.CrystalPairedBraceMatcher"/>
-
+    -->
   </extensions>
 
   <actions>

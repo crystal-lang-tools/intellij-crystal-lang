@@ -40,6 +40,9 @@
             language="Crystal"
             implementationClass="net.kenro.ji.jin.crystal.features.CrystalPairedBraceMatcher"/>
 
+    <moduleType id="CRYSTAL_MODULE" implementationClass="net.kenro.ji.jin.crystal.project.CrystalModuleType" />
+    <moduleBuilder builderClass="net.kenro.ji.jin.crystal.project.CrystalModuleBuilder" />
+
   </extensions>
 
   <actions>

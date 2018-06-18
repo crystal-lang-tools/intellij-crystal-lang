@@ -1,7 +1,7 @@
 # Crystal plugin for the IntelliJ Platform
 
 
-[![Build Status](https://travis-ci.org/intellij-crystal/intellij-crystal.svg?branch=master)](https://travis-ci.org/intellij-crystal/intellij-crystal)
+[![Build Status](https://travis-ci.org/crystal-lang-tools/intellij-crystal-lang.svg?branch=master)](https://travis-ci.org/crystal-lang-tools/intellij-crystal-lang)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 

@@ -13,7 +13,7 @@ env:
   - ORG_GRADLE_PROJECT_downloadIdeaSources=true
   matrix:
   - ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
-  - ORG_GRADLE_PROJECT_ideaVersion=2017.2
+  - ORG_GRADLE_PROJECT_ideaVersion=2018.2
 
 matrix:
   allow_failures:

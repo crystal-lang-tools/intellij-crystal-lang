@@ -9,7 +9,7 @@ buildscript {
 }
 
 plugins {
-    id 'org.jetbrains.intellij' version '0.2.5'
+    id 'org.jetbrains.intellij' version '0.3.4'
 }
 
 
@@ -92,6 +92,7 @@ allprojects {
         pluginName 'intellij-crystal'
         version ideaVersion
         plugins ['PsiViewer:3.28.93']
+        intellij.updateSinceUntilBuild false //Disables updating since-build attribute in plugin.xml
 
         publishPlugin {
             username System.getenv('JETBRAINS_USERNAME')

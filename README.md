@@ -1,3 +1,7 @@
+#### NOTE: Check https://github.com/asedunov/intellij-crystal-lang for an up to date IntelliJ plugin for Crystal language
+
+---
+
 # Crystal plugin for the IntelliJ Platform
 
 
